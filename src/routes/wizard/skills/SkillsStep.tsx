@@ -38,13 +38,17 @@ function SkillsStepContent({ goalId }: { goalId: string }) {
   const selections = useWizardStore((s) => s.selections)
   const selectionsGoalId = useWizardStore((s) => s.selectionsGoalId)
   const seedDefaults = useWizardStore((s) => s.seedDefaults)
+  const pruneSelections = useWizardStore((s) => s.pruneSelections)
   const setGoal = useWizardStore((s) => s.setGoal)
   const needsSeed = selectionsGoalId !== goalId
 
   // Plan §6.1: seed once per goal, in a single update, before paint (no empty-then-filled flicker).
+  // Already-seeded selections are only re-checked against the catalog, never re-seeded.
   useLayoutEffect(() => {
-    if (needsSeed && goal && catalog) seedDefaults(goal, catalog)
-  }, [needsSeed, goal, catalog, seedDefaults])
+    if (!goal || !catalog) return
+    if (needsSeed) seedDefaults(goal, catalog)
+    else pruneSelections(catalog)
+  }, [needsSeed, goal, catalog, seedDefaults, pruneSelections])
 
   const ready = Boolean(catalog && goal && !needsSeed)
 

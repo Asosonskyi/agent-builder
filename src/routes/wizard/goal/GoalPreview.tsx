@@ -14,7 +14,7 @@ export function GoalPreview({ goal }: { goal: Goal | undefined }) {
       {goal ? (
         <>
           <ImagePlaceholder src={goal.image} className={`${IMAGE_SIZE} shrink-0 bg-background`} />
-          <h2 className="mt-9 text-[2rem] leading-tight text-ink">{goal.title}</h2>
+          <h2 className="mt-9 text-[2rem] leading-tight font-semibold text-ink">{goal.title}</h2>
           <p className="mt-4 max-w-72 text-base text-ink-muted">{goal.description}</p>
         </>
       ) : (

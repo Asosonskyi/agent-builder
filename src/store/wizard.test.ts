@@ -118,6 +118,26 @@ describe("selection actions", () => {
   })
 })
 
+describe("pruneSelections", () => {
+  it("drops skills and connectors the catalog no longer has", () => {
+    visitSkills()
+    store().toggleSkill("removed_skill", "search")
+    store().toggleConnector("research", "removed_connector")
+    store().pruneSelections(catalog)
+    expect(store().selections).toEqual({
+      research: { categoryId: "search", connectorIds: ["firecrawl"] },
+      summaries: { categoryId: "search", connectorIds: ["notion"] },
+    })
+  })
+
+  it("keeps the same selections object when nothing changed", () => {
+    visitSkills()
+    const before = store().selections
+    store().pruneSelections(catalog)
+    expect(store().selections).toBe(before)
+  })
+})
+
 describe("resetWizard", () => {
   it("clears everything except the locale", () => {
     store().setLocale("en")

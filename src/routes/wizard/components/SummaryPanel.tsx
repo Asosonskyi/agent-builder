@@ -1,3 +1,4 @@
+import { cn } from "cn"
 import { XIcon } from "lucide-react"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -11,9 +12,11 @@ interface SummaryPanelProps {
   goal: Goal | undefined
   catalog: CategoryGroup[] | undefined
   onChangeCategory: (categoryId: string) => void
+  /** Locks "Change" and remove while a submit is in flight. */
+  disabled?: boolean
 }
 
-export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelProps) {
+export function SummaryPanel({ goal, catalog, onChangeCategory, disabled }: SummaryPanelProps) {
   const { t } = useTranslation()
   const selections = useWizardStore((s) => s.selections)
   const selected = catalog ? selectedByCategory(catalog, selections) : []
@@ -30,7 +33,9 @@ export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelPr
             className="size-14 shrink-0 bg-background sm:size-20"
           />
           <div className="flex min-w-0 flex-col gap-2">
-            <h2 className="text-xl leading-tight text-ink sm:text-[1.75rem]">{goal.title}</h2>
+            <h2 className="text-xl font-semibold leading-tight text-ink sm:text-[1.75rem]">
+              {goal.title}
+            </h2>
             <p className="text-base text-ink-muted">{goal.description}</p>
           </div>
         </div>
@@ -38,13 +43,14 @@ export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelPr
         <Skeleton className="h-20 w-full" />
       )}
 
-      <h3 className="mt-8 text-xl text-ink sm:mt-10">{t("summary.willDo")}</h3>
+      <h3 className="mt-8 text-xl font-semibold text-ink sm:mt-10">{t("summary.willDo")}</h3>
       <ul className="mt-5 flex flex-col">
         {selected.map((item) => (
           <SummaryCategory
             key={item.category.id}
             item={item}
             onChange={() => onChangeCategory(item.category.id)}
+            disabled={disabled}
           />
         ))}
       </ul>
@@ -54,7 +60,15 @@ export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelPr
   )
 }
 
-function SummaryCategory({ item, onChange }: { item: SelectedCategory; onChange: () => void }) {
+function SummaryCategory({
+  item,
+  onChange,
+  disabled,
+}: {
+  item: SelectedCategory
+  onChange: () => void
+  disabled?: boolean
+}) {
   const { t } = useTranslation()
   const clearCategory = useWizardStore((s) => s.clearCategory)
   const [expanded, setExpanded] = useState(true)
@@ -65,19 +79,25 @@ function SummaryCategory({ item, onChange }: { item: SelectedCategory; onChange:
   return (
     <li className="border-b border-line pb-4 not-first:pt-4">
       <div className="flex items-start justify-between gap-4">
-        <h4 className="text-base font-medium text-ink">{item.category.title}</h4>
+        <h4 className="text-base font-semibold text-ink">{item.category.title}</h4>
         <button
           type="button"
           aria-label={t("summary.remove", { title: item.category.title })}
           onClick={() => clearCategory(item.category.id)}
-          className="text-ink outline-none hover:text-danger focus-visible:ring-3 focus-visible:ring-ring/50"
+          disabled={disabled}
+          className="text-ink outline-none hover:text-danger focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
         >
           <XIcon className="size-5" />
         </button>
       </div>
       <div className="mt-1 flex items-center gap-2 text-sm text-ink-muted">
         <span>{t("summary.selectedCount", { count: item.skills.length })}</span>
-        <button type="button" onClick={onChange} className={linkClass}>
+        <button
+          type="button"
+          onClick={onChange}
+          disabled={disabled}
+          className={cn(linkClass, "disabled:pointer-events-none disabled:opacity-50")}
+        >
           {t("summary.change")}
         </button>
         <span aria-hidden className="h-3 w-px bg-line" />
@@ -94,7 +114,9 @@ function SummaryCategory({ item, onChange }: { item: SelectedCategory; onChange:
       {expanded && (
         <ul id={listId} className="mt-4 flex list-disc flex-col gap-1 pl-5 text-sm text-ink">
           {item.skills.map((skill) => (
-            <li key={skill.id}>{skill.title}</li>
+            <li key={skill.id} className="text-sm font-medium">
+              {skill.title}
+            </li>
           ))}
         </ul>
       )}

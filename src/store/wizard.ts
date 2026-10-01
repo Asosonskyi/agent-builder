@@ -25,6 +25,7 @@ export interface WizardActions {
   setLocale: (locale: Locale) => void
   setGoal: (goalId: string) => void
   seedDefaults: (goal: Goal, catalog: CategoryGroup[]) => void
+  pruneSelections: (catalog: CategoryGroup[]) => void
   toggleSkill: (skillId: string, categoryId: string) => void
   toggleConnector: (skillId: string, connectorId: string) => void
   selectAllInCategory: (category: Category) => void
@@ -47,9 +48,23 @@ const initialData = (locale: Locale): WizardData => ({
   contact: { name: "", email: "", company: "" },
 })
 
+type CatalogIndex = Map<string, { categoryId: string; connectorIds: Set<string> }>
+
+function indexCatalog(catalog: CategoryGroup[]): CatalogIndex {
+  const index: CatalogIndex = new Map()
+  for (const group of catalog)
+    for (const category of group.categories)
+      for (const skill of category.skills)
+        index.set(skill.id, {
+          categoryId: category.id,
+          connectorIds: new Set(skill.availableConnectors.map((c) => c.id)),
+        })
+  return index
+}
+
 export const useWizardStore = create<WizardState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       ...initialData(detectLocale()),
 
       setLocale: (locale) => set({ locale }),
@@ -57,15 +72,7 @@ export const useWizardStore = create<WizardState>()(
       setGoal: (goalId) => set({ goalId }),
 
       seedDefaults: (goal, catalog) => {
-        const skillIndex = new Map<string, { categoryId: string; connectorIds: Set<string> }>()
-        for (const group of catalog)
-          for (const category of group.categories)
-            for (const skill of category.skills)
-              skillIndex.set(skill.id, {
-                categoryId: category.id,
-                connectorIds: new Set(skill.availableConnectors.map((c) => c.id)),
-              })
-
+        const skillIndex = indexCatalog(catalog)
         const selections: WizardData["selections"] = {}
         for (const { skillId, connectorIds } of goal.defaultSelectedSkills) {
           const known = skillIndex.get(skillId)
@@ -76,6 +83,31 @@ export const useWizardStore = create<WizardState>()(
           }
         }
         set({ selections, selectionsGoalId: goal.id })
+      },
+
+      // Persisted selections may outlive the catalog (a skill or connector removed by the API).
+      // Drops what no longer exists and leaves the state untouched when nothing changed.
+      pruneSelections: (catalog) => {
+        const skillIndex = indexCatalog(catalog)
+        const current = get().selections
+        const next: WizardData["selections"] = {}
+        let changed = false
+        for (const [skillId, selection] of Object.entries(current)) {
+          const known = skillIndex.get(skillId)
+          if (!known) {
+            changed = true
+            continue
+          }
+          const connectorIds = selection.connectorIds.filter((id) => known.connectorIds.has(id))
+          if (
+            known.categoryId !== selection.categoryId ||
+            connectorIds.length !== selection.connectorIds.length
+          ) {
+            changed = true
+            next[skillId] = { categoryId: known.categoryId, connectorIds }
+          } else next[skillId] = selection
+        }
+        if (changed) set({ selections: next })
       },
 
       toggleSkill: (skillId, categoryId) =>
@@ -126,13 +158,14 @@ export const useWizardStore = create<WizardState>()(
         selections,
         contact,
       }),
-      // Unknown or older persisted shapes fall back to a fresh wizard, keeping a valid locale.
-      migrate: (persisted, version) => {
+      // Zustand calls `migrate` only when the stored version differs from PERSIST_VERSION, so any
+      // other version falls back to a fresh wizard, keeping a valid locale. Same-version data is
+      // merged as-is; selections are re-checked against the catalog by `pruneSelections`.
+      migrate: (persisted) => {
         const old = persisted as Partial<WizardData> | undefined
-        const fresh = initialData(
+        return initialData(
           old?.locale === "en" || old?.locale === "uk" ? old.locale : detectLocale(),
         )
-        return version === PERSIST_VERSION ? { ...fresh, ...old } : fresh
       },
     },
   ),

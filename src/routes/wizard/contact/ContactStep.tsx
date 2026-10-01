@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { ArrowLeftIcon, ArrowRightIcon, LoaderCircleIcon } from "lucide-react"
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
@@ -28,9 +28,16 @@ export default function ContactStep() {
   const savedContact = useWizardStore((s) => s.contact)
   const setContact = useWizardStore((s) => s.setContact)
   const resetWizard = useWizardStore((s) => s.resetWizard)
+  const pruneSelections = useWizardStore((s) => s.pruneSelections)
 
   const goal = useGoals().data?.find((g) => g.id === goalId)
   const catalog = useCategories(goalId).data
+
+  // Drop persisted skills/connectors the catalog no longer has, so they are never submitted.
+  // Emptying the selections this way sends the user back to /skills via RequireSkills.
+  useLayoutEffect(() => {
+    if (catalog) pruneSelections(catalog)
+  }, [catalog, pruneSelections])
 
   const form = useForm<Contact>({
     resolver: zodResolver(contactSchema),
@@ -49,15 +56,8 @@ export default function ContactStep() {
     [form, setContact],
   )
 
-  const submit = useMutation({
-    mutationFn: submitEstimate,
-    onSuccess: async () => {
-      // Commit the navigation first (flushSync bypasses the router's transition): resetting
-      // while /contact is still rendered would trip its guard and redirect to /skills.
-      await navigate("/success", { state: { submitted: true }, replace: true, flushSync: true })
-      resetWizard()
-    },
-  })
+  const submit = useMutation({ mutationFn: submitEstimate })
+  const locked = submit.isPending
 
   const onSubmit = form.handleSubmit((contact) => {
     const { locale, selections } = useWizardStore.getState()
@@ -70,7 +70,16 @@ export default function ContactStep() {
       })),
       contact: { ...contact, company: contact.company || undefined },
     }
-    submit.mutate(payload)
+    // Per-call callback: it does not run if the user has left /contact (e.g. browser Back) before
+    // the request settles, so a late success cannot reset edits made since.
+    submit.mutate(payload, {
+      onSuccess: async () => {
+        // Commit the navigation first (flushSync bypasses the router's transition): resetting
+        // while /contact is still rendered would trip its guard and redirect to /skills.
+        await navigate("/success", { state: { submitted: true }, replace: true, flushSync: true })
+        resetWizard()
+      },
+    })
   })
 
   const goToCategory = (categoryId: string) =>
@@ -83,23 +92,32 @@ export default function ContactStep() {
       step={3}
       title={t("contact.title")}
       subtitle={t("contact.subtitle")}
-      aside={<SummaryPanel goal={goal} catalog={catalog} onChangeCategory={goToCategory} />}
+      aside={
+        <SummaryPanel
+          goal={goal}
+          catalog={catalog}
+          onChangeCategory={goToCategory}
+          disabled={locked}
+        />
+      }
       footer={
         <WizardFooter
           back={
-            <ButtonLink variant="back" size="xl" to="/skills" className="max-sm:px-4">
+            <ButtonLink
+              variant="back"
+              size="xl"
+              to="/skills"
+              disabled={locked}
+              className="max-sm:px-4 font-medium"
+            >
               <ArrowLeftIcon />
               <span className="max-sm:sr-only">{t("contact.back")}</span>
             </ButtonLink>
           }
           next={
-            <Button size="xl" type="submit" form={FORM_ID} disabled={submit.isPending}>
-              {submit.isPending ? t("common.sending") : t("contact.submit")}
-              {submit.isPending ? (
-                <LoaderCircleIcon className="animate-spin" />
-              ) : (
-                <ArrowRightIcon />
-              )}
+            <Button size="xl" type="submit" className="font-medium" form={FORM_ID} disabled={locked || !catalog}>
+              {locked ? t("common.sending") : t("contact.submit")}
+              {locked ? <LoaderCircleIcon className="animate-spin" /> : <ArrowRightIcon />}
             </Button>
           }
         />
