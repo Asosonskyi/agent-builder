@@ -33,13 +33,13 @@ export default function QuickRequest() {
   )
 
   return (
-    <main className="mx-auto grid w-full max-w-page flex-1 grid-cols-[580fr_548fr] items-center gap-12 pb-12">
+    <main className="mx-auto grid w-full max-w-page flex-1 grid-cols-1 content-start gap-12 pb-12 lg:grid-cols-[580fr_548fr] lg:content-stretch lg:items-center">
       <section className="flex flex-col justify-center">
-        <h1 className="text-[2.5rem] leading-[1.2] font-medium tracking-tight text-ink">
+        <h1 className="text-[1.75rem] leading-[1.2] font-medium tracking-tight text-ink sm:text-[2.25rem] lg:text-[2.5rem]">
           {t("quick.title")}
         </h1>
-        <p className="mt-4 text-base text-ink-muted">{t("quick.subtitle")}</p>
-        <form noValidate onSubmit={onSubmit} className="mt-11 flex flex-col gap-6">
+        <p className="mt-3 text-base text-ink-muted sm:mt-4">{t("quick.subtitle")}</p>
+        <form noValidate onSubmit={onSubmit} className="mt-8 flex flex-col gap-6 lg:mt-11">
           <FormField label={t("quick.name")} error={errors.name}>
             {(props) => <Input autoComplete="name" {...props} {...form.register("name")} />}
           </FormField>
@@ -66,14 +66,15 @@ export default function QuickRequest() {
             </p>
           )}
           <div>
-            <Button size="xl" type="submit" disabled={submit.isPending}>
+            <Button size="xl" type="submit" disabled={submit.isPending} className="max-sm:w-full">
               {submit.isPending ? t("common.sending") : t("quick.submit")}
               {submit.isPending && <LoaderCircleIcon className="animate-spin" />}
             </Button>
           </div>
         </form>
       </section>
-      <ImagePlaceholder className="h-full max-h-180 min-h-96 bg-panel text-base">
+      {/* The form is the point on smaller screens; the illustration only fills the desktop column. */}
+      <ImagePlaceholder className="h-full max-h-180 min-h-96 bg-panel text-base max-lg:hidden">
         {t("common.illustrationPlaceholder")}
       </ImagePlaceholder>
     </main>

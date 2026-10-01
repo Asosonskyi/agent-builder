@@ -87,9 +87,9 @@ export default function ContactStep() {
       footer={
         <WizardFooter
           back={
-            <ButtonLink variant="back" size="xl" to="/skills">
+            <ButtonLink variant="back" size="xl" to="/skills" className="max-sm:px-4">
               <ArrowLeftIcon />
-              {t("contact.back")}
+              <span className="max-sm:sr-only">{t("contact.back")}</span>
             </ButtonLink>
           }
           next={
@@ -105,7 +105,12 @@ export default function ContactStep() {
         />
       }
     >
-      <form id={FORM_ID} noValidate onSubmit={onSubmit} className="mt-14 flex flex-col gap-6">
+      <form
+        id={FORM_ID}
+        noValidate
+        onSubmit={onSubmit}
+        className="mt-8 flex flex-col gap-6 lg:mt-14"
+      >
         <FormField label={t("contact.name")} error={errors.name}>
           {(props) => <Input autoComplete="name" {...props} {...form.register("name")} />}
         </FormField>

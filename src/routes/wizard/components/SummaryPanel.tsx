@@ -19,12 +19,18 @@ export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelPr
   const selected = catalog ? selectedByCategory(catalog, selections) : []
 
   return (
-    <div className="flex min-h-[39.75rem] flex-col bg-panel p-8" aria-label={t("summary.willDo")}>
+    <div
+      className="flex flex-col bg-panel p-5 sm:p-8 lg:min-h-159"
+      aria-label={t("summary.willDo")}
+    >
       {goal ? (
         <div className="flex items-start gap-4">
-          <ImagePlaceholder src={goal.image} className="size-20 shrink-0 bg-background" />
-          <div className="flex flex-col gap-2">
-            <h2 className="text-[1.75rem] leading-tight text-ink">{goal.title}</h2>
+          <ImagePlaceholder
+            src={goal.image}
+            className="size-14 shrink-0 bg-background sm:size-20"
+          />
+          <div className="flex min-w-0 flex-col gap-2">
+            <h2 className="text-xl leading-tight text-ink sm:text-[1.75rem]">{goal.title}</h2>
             <p className="text-base text-ink-muted">{goal.description}</p>
           </div>
         </div>
@@ -32,7 +38,7 @@ export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelPr
         <Skeleton className="h-20 w-full" />
       )}
 
-      <h3 className="mt-10 text-xl text-ink">{t("summary.willDo")}</h3>
+      <h3 className="mt-8 text-xl text-ink sm:mt-10">{t("summary.willDo")}</h3>
       <ul className="mt-5 flex flex-col">
         {selected.map((item) => (
           <SummaryCategory
@@ -43,7 +49,7 @@ export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelPr
         ))}
       </ul>
 
-      <p className="mt-auto pt-10 text-sm text-ink-muted">{t("summary.footer")}</p>
+      <p className="mt-auto pt-8 text-sm text-ink-muted sm:pt-10">{t("summary.footer")}</p>
     </div>
   )
 }

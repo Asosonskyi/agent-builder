@@ -22,10 +22,10 @@ export function StepHeader({ step, title, subtitle }: StepHeaderProps) {
           className="flex-1 [&_[data-slot=progress-track]]:h-2 [&_[data-slot=progress-track]]:rounded-none [&_[data-slot=progress-track]]:bg-panel"
         />
       </div>
-      <h1 className="mt-6 text-[2.5rem] leading-[1.2] font-medium tracking-tight text-ink short:mt-4 short:text-[2rem]">
+      <h1 className="mt-5 text-[1.75rem] leading-[1.2] font-medium tracking-tight text-ink sm:mt-6 sm:text-[2.25rem] lg:text-[2.5rem] short:mt-4 short:text-[2rem]">
         {title}
       </h1>
-      {subtitle && <p className="mt-4 text-base text-ink-muted short:mt-2">{subtitle}</p>}
+      {subtitle && <p className="mt-3 text-base text-ink-muted sm:mt-4 short:mt-2">{subtitle}</p>}
     </div>
   )
 }

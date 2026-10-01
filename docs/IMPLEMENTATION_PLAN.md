@@ -13,7 +13,7 @@ This document is the source of truth for the implementation. Anything marked **O
 - Catalog data (goals, categories, skills, connectors) loaded through an API layer, **mocked** for now.
 - Wizard progress persisted across page reloads.
 - Two languages: Ukrainian (`uk`) and English (`en`). Locale is **not** in the URL.
-- Desktop-only layout.
+- Responsive layout: desktop per Figma; tablet/mobile improvised (no design), single column below `lg` (1024px).
 - Deployed to GitHub Pages as a static demo.
 
 ### Out of scope (later phases)
@@ -21,7 +21,6 @@ This document is the source of truth for the implementation. Anything marked **O
 - Real OAuth connections to Google Drive, Notion, etc. In this phase connectors are **just tags** the user selects ("Connect to (optional)").
 - The short form behind "Submit request in 1 click" / "Quick request" / "Another way" (design pending).
 - Accounts / auth (app is anonymous).
-- Mobile/tablet layouts.
 - Analytics, cookie consent, captcha.
 
 ---
@@ -372,7 +371,7 @@ e2e/
 - Button variants: primary (filled green), secondary (green outline, green text), back (dark outline with ←).
 - Selected states (goal card, skill card): green border + light green background.
 - Illustrations and goal/category icons are placeholders in the layouts; use Figma assets when available, otherwise neutral grey placeholders.
-- Desktop only; set a sensible min-width for the layout container.
+- Desktop (`lg`+) follows Figma. Below `lg`: single column, decorative illustrations/goal preview hidden, summary panel below the content, wizard footer sticky with an icon-only Back button on phones. The height-based `short:` variant applies at `lg`+ only. Min width 320px.
 - Accessibility: keyboard-operable accordion/checkboxes/chips, visible focus, labels on inputs, `aria-pressed` on chips, `aria-disabled` reasoning on the disabled primary button.
 
 ---

@@ -4,8 +4,11 @@
 @import "@fontsource-variable/manrope";
 
 @custom-variant dark (&:is(.dark *));
-/* Laptop-height screens: tighter vertical rhythm so step 1 fits without scrolling. */
-@custom-variant short (@media (height < 56.25rem));
+/*
+ * Laptop-height screens: tighter vertical rhythm so step 1 fits without scrolling. Desktop widths
+ * only; below `lg` the layout is a single scrolling column and height doesn't matter.
+ */
+@custom-variant short (@media (width >= 64rem) and (height < 56.25rem));
 
 /*
  * Design tokens.
@@ -91,7 +94,7 @@
   --radius-3xl: var(--radius);
   --radius-4xl: var(--radius);
 
-  /* Desktop-only layout */
+  /* Desktop layout width; below `lg` the content stacks into one column. */
   --container-page: 73.5rem;
 }
 
@@ -103,6 +106,6 @@
     @apply font-sans;
   }
   body {
-    @apply min-w-5xl bg-background text-foreground antialiased;
+    @apply min-w-80 bg-background text-foreground antialiased;
   }
 }

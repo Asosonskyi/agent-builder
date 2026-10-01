@@ -79,9 +79,9 @@ function SkillsStepContent({ goalId }: { goalId: string }) {
       footer={
         <WizardFooter
           back={
-            <ButtonLink variant="back" size="xl" to="/goal">
+            <ButtonLink variant="back" size="xl" to="/goal" className="max-sm:px-4">
               <ArrowLeftIcon />
-              {t("skills.back")}
+              <span className="max-sm:sr-only">{t("skills.back")}</span>
             </ButtonLink>
           }
           next={
@@ -98,7 +98,7 @@ function SkillsStepContent({ goalId }: { goalId: string }) {
         />
       }
     >
-      <div className="mt-12">
+      <div className="mt-8 lg:mt-12">
         {categories.isError || goals.isError ? (
           <ErrorState
             onRetry={() => {
@@ -161,8 +161,8 @@ function SkillsSkeleton() {
     <div className="flex flex-col gap-6" aria-busy>
       <Skeleton className="h-4 w-48" />
       {[0, 1, 2, 3].map((i) => (
-        <div key={i} className="flex gap-4">
-          <Skeleton className="size-20 shrink-0" />
+        <div key={i} className="flex gap-3 sm:gap-4">
+          <Skeleton className="size-14 shrink-0 sm:size-20" />
           <div className="flex flex-1 flex-col gap-3 pt-1">
             <Skeleton className="h-6 w-2/3" />
             <Skeleton className="h-4 w-full" />

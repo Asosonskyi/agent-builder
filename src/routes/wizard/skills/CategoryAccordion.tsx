@@ -18,14 +18,14 @@ export function CategoryAccordion({ category }: { category: Category }) {
     <AccordionItem
       value={category.id}
       id={`category-${category.id}`}
-      className="scroll-mt-6 border-b border-line py-6 not-last:border-b"
+      className="scroll-mt-6 border-b border-line py-5 not-last:border-b sm:py-6"
     >
       <AccordionPrimitive.Header>
-        <AccordionPrimitive.Trigger className="group flex w-full items-start gap-4 text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-          <ImagePlaceholder src={category.icon} className="size-20 shrink-0" />
-          <span className="flex flex-1 flex-col gap-2 pt-1">
-            <span className="text-xl text-ink">{category.title}</span>
-            <span className="text-base text-ink-muted">{category.description}</span>
+        <AccordionPrimitive.Trigger className="group flex w-full items-start gap-3 text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:gap-4">
+          <ImagePlaceholder src={category.icon} className="size-14 shrink-0 sm:size-20" />
+          <span className="flex min-w-0 flex-1 flex-col gap-1 pt-1 sm:gap-2">
+            <span className="text-lg text-ink sm:text-xl">{category.title}</span>
+            <span className="text-sm text-ink-muted sm:text-base">{category.description}</span>
           </span>
           <span className="self-center text-ink">
             <PlusIcon className="size-6 group-data-panel-open:hidden" />

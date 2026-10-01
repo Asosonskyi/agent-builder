@@ -18,7 +18,12 @@ export function HeaderCta() {
   const isEstimate = cta === "getEstimate"
 
   return (
-    <ButtonLink variant="brand" size="xl" to={isEstimate ? "/goal" : "/quick"}>
+    <ButtonLink
+      variant="brand"
+      size="xl"
+      to={isEstimate ? "/goal" : "/quick"}
+      className="max-sm:h-11 max-sm:gap-1.5 max-sm:px-3 max-sm:text-sm max-sm:[&_svg]:size-4"
+    >
       {t(`header.cta.${cta}`)}
       {isEstimate && <ArrowRightIcon />}
     </ButtonLink>

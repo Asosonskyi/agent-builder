@@ -3,7 +3,7 @@ import { CategoryAccordion } from "./CategoryAccordion"
 
 export function CategoryGroup({ group }: { group: CategoryGroupData }) {
   return (
-    <section aria-labelledby={`group-${group.id}`} className="mt-12 first:mt-0">
+    <section aria-labelledby={`group-${group.id}`} className="mt-10 first:mt-0 sm:mt-12">
       <h2
         id={`group-${group.id}`}
         className="text-sm font-semibold tracking-wide text-ink uppercase"

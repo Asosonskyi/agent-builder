@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**AI Agent Scope Builder**: a standalone demo app for Incode Group. It is a 3-step wizard (goal → skills + connectors → contact details → thank-you screen) that collects requirements so the team can prepare a cost estimate by hand. It is deployed to GitHub Pages as a static, desktop-only site.
+**AI Agent Scope Builder**: a standalone demo app for Incode Group. It is a 3-step wizard (goal → skills + connectors → contact details → thank-you screen) that collects requirements so the team can prepare a cost estimate by hand. It is deployed to GitHub Pages as a static site. Desktop follows Figma; tablet and mobile layouts are improvised (single column below `lg`).
 
 **[docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) is the source of truth** for screens, routes, data model, store shape, and phases. Read the relevant section before building a feature. Anything listed under "Open questions" (§13) must be confirmed with the user before you build the affected part. Do not guess.
 

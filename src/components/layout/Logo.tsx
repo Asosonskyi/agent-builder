@@ -8,11 +8,12 @@ export function Logo() {
   return (
     <Link
       to="/"
-      className="flex items-center gap-5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="flex shrink-0 items-center gap-5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      <img src={logoSrc} alt={t("header.logoAlt")} className="h-14" />
-      <span aria-hidden className="h-12 w-px bg-line" />
-      <span className="flex flex-col text-base leading-6 text-ink">
+      <img src={logoSrc} alt={t("header.logoAlt")} className="h-8 sm:h-14" />
+      {/* The product name needs room the phone header doesn't have. */}
+      <span aria-hidden className="h-12 w-px bg-line max-md:hidden" />
+      <span className="flex flex-col text-base leading-6 text-ink max-md:hidden">
         <span>{t("header.productLine1")}</span>
         <span>{t("header.productLine2")}</span>
       </span>

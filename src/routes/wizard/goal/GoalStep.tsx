@@ -44,7 +44,11 @@ export default function GoalStep() {
         />
       }
     >
-      <div role="radiogroup" aria-label={t("goal.title")} className="mt-14 flex flex-col gap-6 short:mt-8 short:gap-4">
+      <div
+        role="radiogroup"
+        aria-label={t("goal.title")}
+        className="mt-8 flex flex-col gap-4 sm:gap-6 lg:mt-14 short:mt-8 short:gap-4"
+      >
         {goals.isError ? (
           <ErrorState onRetry={() => void goals.refetch()} />
         ) : goals.data ? (
