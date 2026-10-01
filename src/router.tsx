@@ -1,13 +1,15 @@
-import { createBrowserRouter, Navigate } from "react-router"
+import type { ComponentType } from "react"
+import { createBrowserRouter, Navigate, Outlet } from "react-router"
 import { RootLayout } from "@/components/layout/RootLayout"
-import ContactStep from "@/routes/wizard/contact/ContactStep"
-import GoalStep from "@/routes/wizard/goal/GoalStep"
 import Landing from "@/routes/Landing"
-import QuickRequest from "@/routes/QuickRequest"
-import SkillsStep from "@/routes/wizard/skills/SkillsStep"
 import Success from "@/routes/Success"
 import { RequireSubmitted } from "@/routes/guards"
 import { RequireGoal, RequireSkills } from "@/routes/wizard/guards"
+
+/** Route-level code splitting: the page chunk is fetched before the navigation commits. */
+const page = (load: () => Promise<{ default: ComponentType }>) => async () => ({
+  Component: (await load()).default,
+})
 
 export const router = createBrowserRouter(
   [
@@ -15,26 +17,33 @@ export const router = createBrowserRouter(
       element: <RootLayout />,
       children: [
         { index: true, element: <Landing /> },
-        { path: "goal", element: <GoalStep /> },
+        { path: "goal", lazy: page(() => import("@/routes/wizard/goal/GoalStep")) },
         {
-          path: "skills",
           element: (
             <RequireGoal>
-              <SkillsStep />
+              <Outlet />
             </RequireGoal>
           ),
+          children: [
+            { path: "skills", lazy: page(() => import("@/routes/wizard/skills/SkillsStep")) },
+            {
+              element: (
+                <RequireSkills>
+                  <Outlet />
+                </RequireSkills>
+              ),
+              children: [
+                {
+                  path: "contact",
+                  lazy: page(() => import("@/routes/wizard/contact/ContactStep")),
+                },
+              ],
+            },
+          ],
         },
-        {
-          path: "contact",
-          element: (
-            <RequireGoal>
-              <RequireSkills>
-                <ContactStep />
-              </RequireSkills>
-            </RequireGoal>
-          ),
-        },
-        { path: "quick", element: <QuickRequest /> },
+        { path: "quick", lazy: page(() => import("@/routes/QuickRequest")) },
+        // Stays eager: submit relies on a synchronous navigate(..., { flushSync: true }) to
+        // /success, and a lazy route would make that navigation async (guard race).
         {
           path: "success",
           element: (

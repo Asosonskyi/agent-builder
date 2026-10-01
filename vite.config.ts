@@ -10,6 +10,23 @@ export default defineConfig({
   base: process.env.VITE_BASE ?? "/agent-builder/",
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": path.resolve(import.meta.dirname, "./src") } },
+  build: {
+    rolldownOptions: {
+      output: {
+        // Long-lived vendor chunks that cache across app deploys. Route chunks come from lazy routes.
+        codeSplitting: {
+          groups: [
+            {
+              name: "react",
+              test: /node_modules[\\/](react|react-dom|scheduler|react-router)[\\/]/,
+              priority: 20,
+            },
+            { name: "vendor", test: /node_modules[\\/]/, priority: 10, entriesAware: true },
+          ],
+        },
+      },
+    },
+  },
   test: {
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
