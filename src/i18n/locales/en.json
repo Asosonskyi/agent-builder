@@ -1,0 +1,87 @@
+{
+  "header": {
+    "logoAlt": "Incode Group",
+    "productLine1": "AI Agent",
+    "productLine2": "Scope Builder",
+    "language": "Language",
+    "cta": {
+      "getEstimate": "Get estimate",
+      "quickRequest": "Quick request",
+      "anotherWay": "Another way"
+    }
+  },
+  "languages": { "uk": "Українська", "en": "English" },
+  "common": {
+    "stepOf": "Step {{step}} of {{total}}",
+    "illustrationPlaceholder": "AI Agent illustration",
+    "loadError": "We couldn't load this content.",
+    "retry": "Try again",
+    "submitError": "Something went wrong. Please try again.",
+    "sending": "Sending…"
+  },
+  "landing": {
+    "badge": "It will take less than 5 minutes",
+    "titleAccent": "Build an AI agent",
+    "titleRest": " for your business, for personal use, or both.",
+    "subtitle": "Answer a few questions, and we'll show you which tasks can be handed over to AI and what your agent could look like.",
+    "getEstimate": "Get estimate",
+    "quickRequest": "Submit request in 1 click"
+  },
+  "goal": {
+    "title": "How do you plan to use your AI agent?",
+    "subtitle": "Choose one goal",
+    "next": "Choose skills"
+  },
+  "skills": {
+    "title": "What should your agent learn?",
+    "subtitle": "Choose one or more categories and skills",
+    "selectAll": "Select all skills",
+    "unselectAll": "Unselect all skills",
+    "connectTo": "Connect to (optional)",
+    "connectToInfo": "Please list the services you use. This is simply to gather requirements for the project assessment—there is no need to set up access at this stage.",
+    "connectorAdd": "Add {{name}}",
+    "connectorRemove": "Remove {{name}}",
+    "expand": "Expand {{title}}",
+    "collapse": "Collapse {{title}}",
+    "cantFind": "Can't find a skill?",
+    "switchToAllInOne": "Switch to All-in-One to see more advanced capabilities",
+    "back": "Back to agent goal",
+    "next": "Share your contacts",
+    "nextDisabledHint": "Select at least one skill to continue"
+  },
+  "summary": {
+    "willDo": "What your agent will do",
+    "selectedCount": "Selected skills: {{count}}",
+    "change": "Change",
+    "hide": "Hide skills",
+    "show": "Show skills",
+    "remove": "Remove {{title}}",
+    "footer": "Here is your agent's configuration. Feel free to make changes."
+  },
+  "contact": {
+    "title": "Your AI agent's configuration is ready! 🎉",
+    "subtitle": "We have gathered the basic requirements. Please provide your contact details, and the Incode Group team will prepare a preliminary cost estimate and an implementation roadmap.",
+    "name": "Name",
+    "email": "Work email",
+    "company": "Company name (optional)",
+    "back": "Back to agent skills",
+    "submit": "Get my estimate"
+  },
+  "quick": {
+    "title": "How about we get to know each other?",
+    "subtitle": "Tell us your name and the best way to reach you.",
+    "name": "Name",
+    "email": "Work email",
+    "agentName": "Agent name idea (optional)",
+    "reason": "Tell us why you need an agent",
+    "submit": "Submit request"
+  },
+  "success": {
+    "title": "Thank you!",
+    "subtitle": "We'll contact you as soon as we've calculated the cost of your agent"
+  },
+  "validation": {
+    "nameRequired": "Please enter your name",
+    "emailInvalid": "Please enter a valid email"
+  }
+}

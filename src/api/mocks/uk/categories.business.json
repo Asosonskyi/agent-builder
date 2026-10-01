@@ -1,0 +1,157 @@
+[
+  {
+    "id": "operations_admin",
+    "title": "ОПЕРАЦІЇ ТА АДМІНІСТРУВАННЯ",
+    "categories": [
+      {
+        "id": "search_documents_knowledge",
+        "title": "Пошук, документи та знання",
+        "description": "Вебдослідження, аналіз документів і миттєві відповіді з вашої бази знань.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "doc_summaries",
+            "title": "Перетворювати довгі документи (навіть 100+ сторінок) на короткі й зрозумілі підсумки.",
+            "availableConnectors": [
+              {
+                "id": "notion",
+                "name": "Notion"
+              },
+              {
+                "id": "google_drive",
+                "name": "Google Drive"
+              }
+            ]
+          },
+          {
+            "id": "knowledge_base",
+            "title": "Збирати розрізнені правила та інструкції компанії в єдину базу знань із пошуком.",
+            "availableConnectors": [
+              {
+                "id": "notion",
+                "name": "Notion"
+              },
+              {
+                "id": "google_drive",
+                "name": "Google Drive"
+              }
+            ]
+          },
+          {
+            "id": "contract_risks",
+            "title": "Знаходити приховані ризики у складних договорах і готувати листи-відповіді.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "communication_meetings",
+        "title": "Комунікація та зустрічі",
+        "description": "Керування поштою, підготовка до зустрічей і розумний аналіз транскриптів.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "transcript_analysis",
+            "title": "Аналізувати транскрипти зустрічей, щоб миттєво знаходити домовленості з колегами.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sales_marketing",
+    "title": "ПРОДАЖІ ТА МАРКЕТИНГ",
+    "categories": [
+      {
+        "id": "crm_customer_support",
+        "title": "CRM та підтримка клієнтів",
+        "description": "Вирішення звернень, аналіз відгуків та автоматичне оновлення CRM.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "support_responses",
+            "title": "Аналізувати відгуки клієнтів і готувати персоналізовані відповіді на типові звернення.",
+            "availableConnectors": []
+          },
+          {
+            "id": "crm_updates",
+            "title": "Витягувати контакти з листів чи документів і автоматично оновлювати записи в CRM.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "content_writing_websites",
+        "title": "Контент, тексти та сайти",
+        "description": "SEO-копірайтинг, генерація креативів для реклами та моніторинг конкурентів.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "seo_content",
+            "title": "Писати SEO-оптимізовані статті, дописи для соцмереж або розсилки за вашими запитами.",
+            "availableConnectors": []
+          },
+          {
+            "id": "creative_copy",
+            "title": "Генерувати креативні ідеї, слогани чи рекламні тексти у стилі вашого бренду.",
+            "availableConnectors": []
+          },
+          {
+            "id": "tender_monitoring",
+            "title": "Відстежувати нові комерційні чи державні тендери, що відповідають вашим вимогам.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "it_analytics",
+    "title": "ІТ ТА АНАЛІТИКА",
+    "categories": [
+      {
+        "id": "data_analytics_reporting",
+        "title": "Аналітика даних і звітність",
+        "description": "Консолідація даних, аналіз трендів користувачів та автоматична звітність.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "data_consolidation",
+            "title": "Зводити багаторічні дані з різних джерел в одну стандартизовану таблицю з кольоровим кодуванням.",
+            "availableConnectors": []
+          },
+          {
+            "id": "usage_trends",
+            "title": "Аналізувати метрики використання продукту й виявляти точки відтоку та тренди.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "specialized_roles",
+    "title": "СПЕЦІАЛІЗОВАНІ РОЛІ",
+    "categories": [
+      {
+        "id": "hr_recruitment",
+        "title": "HR та рекрутинг",
+        "description": "Скринінг резюме, відбір кандидатів і підтримка онбордингу команди.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "resume_screening",
+            "title": "Переглядати резюме, виділяти ключові навички та відбирати кандидатів під вашу вакансію.",
+            "availableConnectors": []
+          },
+          {
+            "id": "onboarding_materials",
+            "title": "Створювати плани онбордингу та навчальні матеріали для нових працівників на основі внутрішніх вікі.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  }
+]

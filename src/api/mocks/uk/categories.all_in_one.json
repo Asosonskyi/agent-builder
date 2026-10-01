@@ -1,0 +1,262 @@
+[
+  {
+    "id": "operations_admin",
+    "title": "ОПЕРАЦІЇ ТА АДМІНІСТРУВАННЯ",
+    "categories": [
+      {
+        "id": "search_documents_knowledge",
+        "title": "Пошук, документи та знання",
+        "description": "Вебдослідження, аналіз документів і миттєві відповіді з вашої бази знань.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "market_research",
+            "title": "Аналізувати ринки, конкурентів чи конкретні теми, порівнюючи факти з різних джерел.",
+            "availableConnectors": [
+              {
+                "id": "firecrawl",
+                "name": "Firecrawl"
+              },
+              {
+                "id": "notion",
+                "name": "Notion"
+              },
+              {
+                "id": "google_drive",
+                "name": "Google Drive"
+              }
+            ]
+          },
+          {
+            "id": "doc_summaries",
+            "title": "Перетворювати довгі документи (навіть 100+ сторінок) на короткі й зрозумілі підсумки.",
+            "availableConnectors": [
+              {
+                "id": "notion",
+                "name": "Notion"
+              },
+              {
+                "id": "google_drive",
+                "name": "Google Drive"
+              }
+            ]
+          },
+          {
+            "id": "knowledge_base",
+            "title": "Збирати розрізнені правила та інструкції компанії в єдину базу знань із пошуком.",
+            "availableConnectors": [
+              {
+                "id": "notion",
+                "name": "Notion"
+              },
+              {
+                "id": "google_drive",
+                "name": "Google Drive"
+              }
+            ]
+          },
+          {
+            "id": "contract_risks",
+            "title": "Знаходити приховані ризики у складних договорах і готувати листи-відповіді.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "communication_meetings",
+        "title": "Комунікація та зустрічі",
+        "description": "Керування поштою, підготовка до зустрічей і розумний аналіз транскриптів.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "meeting_prep",
+            "title": "Готувати вас до зустрічей, збираючи ключові теми та питання, на яких варто зосередитися.",
+            "availableConnectors": []
+          },
+          {
+            "id": "transcript_analysis",
+            "title": "Аналізувати транскрипти зустрічей, щоб миттєво знаходити домовленості з колегами.",
+            "availableConnectors": []
+          },
+          {
+            "id": "email_triage",
+            "title": "Готувати ввічливі відповіді на листи, сортувати вхідні та позначати термінові запити.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sales_marketing",
+    "title": "ПРОДАЖІ ТА МАРКЕТИНГ",
+    "categories": [
+      {
+        "id": "crm_customer_support",
+        "title": "CRM та підтримка клієнтів",
+        "description": "Вирішення звернень, аналіз відгуків та автоматичне оновлення CRM.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "support_responses",
+            "title": "Аналізувати відгуки клієнтів і готувати персоналізовані відповіді на типові звернення.",
+            "availableConnectors": []
+          },
+          {
+            "id": "crm_updates",
+            "title": "Витягувати контакти з листів чи документів і автоматично оновлювати записи в CRM.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "content_writing_websites",
+        "title": "Контент, тексти та сайти",
+        "description": "SEO-копірайтинг, генерація креативів для реклами та моніторинг конкурентів.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "seo_content",
+            "title": "Писати SEO-оптимізовані статті, дописи для соцмереж або розсилки за вашими запитами.",
+            "availableConnectors": []
+          },
+          {
+            "id": "creative_copy",
+            "title": "Генерувати креативні ідеї, слогани чи рекламні тексти у стилі вашого бренду.",
+            "availableConnectors": []
+          },
+          {
+            "id": "tender_monitoring",
+            "title": "Відстежувати нові комерційні чи державні тендери, що відповідають вашим вимогам.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "it_analytics",
+    "title": "ІТ ТА АНАЛІТИКА",
+    "categories": [
+      {
+        "id": "data_analytics_reporting",
+        "title": "Аналітика даних і звітність",
+        "description": "Консолідація даних, аналіз трендів користувачів та автоматична звітність.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "data_consolidation",
+            "title": "Зводити багаторічні дані з різних джерел в одну стандартизовану таблицю з кольоровим кодуванням.",
+            "availableConnectors": []
+          },
+          {
+            "id": "usage_trends",
+            "title": "Аналізувати метрики використання продукту й виявляти точки відтоку та тренди.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "code_infrastructure",
+        "title": "Код та інфраструктура",
+        "description": "Розумне код-рев'ю, технічна документація та автоматичне відстеження задач.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "code_review",
+            "title": "Переглядати зміни в коді, знаходити потенційні баги та пропонувати оптимізації до деплою.",
+            "availableConnectors": []
+          },
+          {
+            "id": "tech_docs",
+            "title": "Писати технічну документацію або пояснювати складну кодову базу новим розробникам.",
+            "availableConnectors": []
+          },
+          {
+            "id": "task_digest",
+            "title": "Щогодини перевіряти таск-трекер і надсилати короткий підсумок нових задач і коментарів.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "specialized_roles",
+    "title": "СПЕЦІАЛІЗОВАНІ РОЛІ",
+    "categories": [
+      {
+        "id": "education_learning",
+        "title": "Освіта та навчання",
+        "description": "Пояснення складних тем, персональні навчальні плани та вивчення мов.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "explain_topics",
+            "title": "Пояснювати складні теми, наукові роботи чи статті простими словами.",
+            "availableConnectors": []
+          },
+          {
+            "id": "study_plans",
+            "title": "Складати персональні навчальні плани та генерувати картки для вивчення мов.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "life_personal_finance",
+        "title": "Життя та особисті фінанси",
+        "description": "Облік особистих витрат, категоризація чеків і планування подорожей.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "expense_tracking",
+            "title": "Вести облік особистих витрат і категоризувати щомісячні чеки в таблиці.",
+            "availableConnectors": []
+          },
+          {
+            "id": "travel_planning",
+            "title": "Планувати маршрути подорожей, включно з перельотами, готелями та місцевими активностями.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "hr_recruitment",
+        "title": "HR та рекрутинг",
+        "description": "Скринінг резюме, відбір кандидатів і підтримка онбордингу команди.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "resume_screening",
+            "title": "Переглядати резюме, виділяти ключові навички та відбирати кандидатів під вашу вакансію.",
+            "availableConnectors": []
+          },
+          {
+            "id": "onboarding_materials",
+            "title": "Створювати плани онбордингу та навчальні матеріали для нових працівників на основі внутрішніх вікі.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "legal_finance",
+        "title": "Право та фінанси",
+        "description": "Порівняння фінансових даних, перевірка відповідності та управління ризиками.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "financial_comparison",
+            "title": "Порівнювати фінансові звіти й виявляти розбіжності або нетипові витрати.",
+            "availableConnectors": []
+          },
+          {
+            "id": "compliance_check",
+            "title": "Перевіряти відповідність внутрішніх документів галузевим стандартам і вимогам законодавства.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  }
+]

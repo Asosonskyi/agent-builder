@@ -1,0 +1,97 @@
+import { XIcon } from "lucide-react"
+import { useState } from "react"
+import { useTranslation } from "react-i18next"
+import type { CategoryGroup, Goal } from "@/api/schemas"
+import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
+import { Skeleton } from "@/components/common/Skeleton"
+import { selectedByCategory, type SelectedCategory } from "@/store/selectors"
+import { useWizardStore } from "@/store/wizard"
+
+interface SummaryPanelProps {
+  goal: Goal | undefined
+  catalog: CategoryGroup[] | undefined
+  onChangeCategory: (categoryId: string) => void
+}
+
+export function SummaryPanel({ goal, catalog, onChangeCategory }: SummaryPanelProps) {
+  const { t } = useTranslation()
+  const selections = useWizardStore((s) => s.selections)
+  const selected = catalog ? selectedByCategory(catalog, selections) : []
+
+  return (
+    <div className="flex min-h-[39.75rem] flex-col bg-panel p-8" aria-label={t("summary.willDo")}>
+      {goal ? (
+        <div className="flex items-start gap-4">
+          <ImagePlaceholder src={goal.image} className="size-20 shrink-0 bg-background" />
+          <div className="flex flex-col gap-2">
+            <h2 className="text-[1.75rem] leading-tight text-ink">{goal.title}</h2>
+            <p className="text-base text-ink-muted">{goal.description}</p>
+          </div>
+        </div>
+      ) : (
+        <Skeleton className="h-20 w-full" />
+      )}
+
+      <h3 className="mt-10 text-xl text-ink">{t("summary.willDo")}</h3>
+      <ul className="mt-5 flex flex-col">
+        {selected.map((item) => (
+          <SummaryCategory
+            key={item.category.id}
+            item={item}
+            onChange={() => onChangeCategory(item.category.id)}
+          />
+        ))}
+      </ul>
+
+      <p className="mt-auto pt-10 text-sm text-ink-muted">{t("summary.footer")}</p>
+    </div>
+  )
+}
+
+function SummaryCategory({ item, onChange }: { item: SelectedCategory; onChange: () => void }) {
+  const { t } = useTranslation()
+  const clearCategory = useWizardStore((s) => s.clearCategory)
+  const [expanded, setExpanded] = useState(true)
+  const listId = `summary-${item.category.id}`
+  const linkClass =
+    "text-brand outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+
+  return (
+    <li className="border-b border-line pb-4 not-first:pt-4">
+      <div className="flex items-start justify-between gap-4">
+        <h4 className="text-base font-medium text-ink">{item.category.title}</h4>
+        <button
+          type="button"
+          aria-label={t("summary.remove", { title: item.category.title })}
+          onClick={() => clearCategory(item.category.id)}
+          className="text-ink outline-none hover:text-danger focus-visible:ring-3 focus-visible:ring-ring/50"
+        >
+          <XIcon className="size-5" />
+        </button>
+      </div>
+      <div className="mt-1 flex items-center gap-2 text-sm text-ink-muted">
+        <span>{t("summary.selectedCount", { count: item.skills.length })}</span>
+        <button type="button" onClick={onChange} className={linkClass}>
+          {t("summary.change")}
+        </button>
+        <span aria-hidden className="h-3 w-px bg-line" />
+        <button
+          type="button"
+          aria-expanded={expanded}
+          aria-controls={listId}
+          onClick={() => setExpanded((v) => !v)}
+          className={linkClass}
+        >
+          {expanded ? t("summary.hide") : t("summary.show")}
+        </button>
+      </div>
+      {expanded && (
+        <ul id={listId} className="mt-4 flex list-disc flex-col gap-1 pl-5 text-sm text-ink">
+          {item.skills.map((skill) => (
+            <li key={skill.id}>{skill.title}</li>
+          ))}
+        </ul>
+      )}
+    </li>
+  )
+}

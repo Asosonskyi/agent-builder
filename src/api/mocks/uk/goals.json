@@ -1,0 +1,70 @@
+[
+  {
+    "id": "personal",
+    "title": "Особисте / Продуктивність",
+    "description": "Фокус на особистій ефективності, рутині та навчанні",
+    "image": "",
+    "defaultSelectedSkills": [
+      {
+        "skillId": "market_research",
+        "connectorIds": [
+          "firecrawl",
+          "notion"
+        ]
+      },
+      {
+        "skillId": "doc_summaries",
+        "connectorIds": [
+          "notion"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "business",
+    "title": "Бізнес / Команда",
+    "description": "Фокус на продажах, маркетингу, підтримці та командній роботі",
+    "image": "",
+    "defaultSelectedSkills": [
+      {
+        "skillId": "doc_summaries",
+        "connectorIds": [
+          "notion"
+        ]
+      },
+      {
+        "skillId": "knowledge_base",
+        "connectorIds": [
+          "notion"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "all_in_one",
+    "title": "Все-в-одному / Індивідуально",
+    "description": "Поєднуйте навички з усіх категорій для рішення під ваші потреби",
+    "image": "",
+    "defaultSelectedSkills": [
+      {
+        "skillId": "market_research",
+        "connectorIds": [
+          "firecrawl",
+          "notion"
+        ]
+      },
+      {
+        "skillId": "doc_summaries",
+        "connectorIds": [
+          "notion"
+        ]
+      },
+      {
+        "skillId": "knowledge_base",
+        "connectorIds": [
+          "notion"
+        ]
+      }
+    ]
+  }
+]

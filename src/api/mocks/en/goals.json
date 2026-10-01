@@ -1,0 +1,70 @@
+[
+  {
+    "id": "personal",
+    "title": "Personal / Productivity",
+    "description": "Focus on personal effectiveness, routine, and learning",
+    "image": "",
+    "defaultSelectedSkills": [
+      {
+        "skillId": "market_research",
+        "connectorIds": [
+          "firecrawl",
+          "notion"
+        ]
+      },
+      {
+        "skillId": "doc_summaries",
+        "connectorIds": [
+          "notion"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "business",
+    "title": "Business / Team",
+    "description": "Focus on sales, marketing, support, and teamwork",
+    "image": "",
+    "defaultSelectedSkills": [
+      {
+        "skillId": "doc_summaries",
+        "connectorIds": [
+          "notion"
+        ]
+      },
+      {
+        "skillId": "knowledge_base",
+        "connectorIds": [
+          "notion"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "all_in_one",
+    "title": "All-in-One / Custom",
+    "description": "Combine skills from all categories for a tailored solution",
+    "image": "",
+    "defaultSelectedSkills": [
+      {
+        "skillId": "market_research",
+        "connectorIds": [
+          "firecrawl",
+          "notion"
+        ]
+      },
+      {
+        "skillId": "doc_summaries",
+        "connectorIds": [
+          "notion"
+        ]
+      },
+      {
+        "skillId": "knowledge_base",
+        "connectorIds": [
+          "notion"
+        ]
+      }
+    ]
+  }
+]

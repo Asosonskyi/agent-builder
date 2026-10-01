@@ -1,0 +1,81 @@
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
+import { LoaderCircleIcon } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router"
+import { quickRequestSchema, type QuickRequest as QuickRequestValues } from "@/api/schemas"
+import { submitQuickRequest } from "@/api/submit"
+import { FormField } from "@/components/common/FormField"
+import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { useWizardStore } from "@/store/wizard"
+
+export default function QuickRequest() {
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const form = useForm<QuickRequestValues>({
+    resolver: zodResolver(quickRequestSchema),
+    defaultValues: { name: "", email: "", agentName: "", reason: "" },
+    mode: "onTouched",
+  })
+  const { errors } = form.formState
+
+  const submit = useMutation({
+    mutationFn: submitQuickRequest,
+    onSuccess: () => navigate("/success", { state: { submitted: true }, replace: true }),
+  })
+
+  const onSubmit = form.handleSubmit((values) =>
+    submit.mutate({ ...values, locale: useWizardStore.getState().locale }),
+  )
+
+  return (
+    <main className="mx-auto grid w-full max-w-page flex-1 grid-cols-[580fr_548fr] items-center gap-12 pb-12">
+      <section className="flex flex-col justify-center">
+        <h1 className="text-[2.5rem] leading-[1.2] font-medium tracking-tight text-ink">
+          {t("quick.title")}
+        </h1>
+        <p className="mt-4 text-base text-ink-muted">{t("quick.subtitle")}</p>
+        <form noValidate onSubmit={onSubmit} className="mt-11 flex flex-col gap-6">
+          <FormField label={t("quick.name")} error={errors.name}>
+            {(props) => <Input autoComplete="name" {...props} {...form.register("name")} />}
+          </FormField>
+          <FormField label={t("quick.email")} error={errors.email}>
+            {(props) => (
+              <Input type="email" autoComplete="email" {...props} {...form.register("email")} />
+            )}
+          </FormField>
+          <FormField label={t("quick.agentName")} error={errors.agentName}>
+            {(props) => <Input {...props} {...form.register("agentName")} />}
+          </FormField>
+          <FormField label={t("quick.reason")} error={errors.reason}>
+            {(props) => (
+              <Textarea
+                {...props}
+                className={`${props.className} h-30 resize-none py-4 [field-sizing:fixed]`}
+                {...form.register("reason")}
+              />
+            )}
+          </FormField>
+          {submit.isError && (
+            <p role="alert" className="text-base text-danger">
+              {t("common.submitError")}
+            </p>
+          )}
+          <div>
+            <Button size="xl" type="submit" disabled={submit.isPending}>
+              {submit.isPending ? t("common.sending") : t("quick.submit")}
+              {submit.isPending && <LoaderCircleIcon className="animate-spin" />}
+            </Button>
+          </div>
+        </form>
+      </section>
+      <ImagePlaceholder className="h-full max-h-180 min-h-96 bg-panel text-base">
+        {t("common.illustrationPlaceholder")}
+      </ImagePlaceholder>
+    </main>
+  )
+}

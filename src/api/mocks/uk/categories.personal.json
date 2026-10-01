@@ -1,0 +1,108 @@
+[
+  {
+    "id": "operations_admin",
+    "title": "ОПЕРАЦІЇ ТА АДМІНІСТРУВАННЯ",
+    "categories": [
+      {
+        "id": "search_documents_knowledge",
+        "title": "Пошук, документи та знання",
+        "description": "Вебдослідження, аналіз документів і миттєві відповіді з вашої бази знань.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "market_research",
+            "title": "Аналізувати ринки, конкурентів чи конкретні теми, порівнюючи факти з різних джерел.",
+            "availableConnectors": [
+              {
+                "id": "firecrawl",
+                "name": "Firecrawl"
+              },
+              {
+                "id": "notion",
+                "name": "Notion"
+              },
+              {
+                "id": "google_drive",
+                "name": "Google Drive"
+              }
+            ]
+          },
+          {
+            "id": "doc_summaries",
+            "title": "Перетворювати довгі документи (навіть 100+ сторінок) на короткі й зрозумілі підсумки.",
+            "availableConnectors": [
+              {
+                "id": "notion",
+                "name": "Notion"
+              },
+              {
+                "id": "google_drive",
+                "name": "Google Drive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "communication_meetings",
+        "title": "Комунікація та зустрічі",
+        "description": "Керування поштою, підготовка до зустрічей і розумний аналіз транскриптів.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "meeting_prep",
+            "title": "Готувати вас до зустрічей, збираючи ключові теми та питання, на яких варто зосередитися.",
+            "availableConnectors": []
+          },
+          {
+            "id": "email_triage",
+            "title": "Готувати ввічливі відповіді на листи, сортувати вхідні та позначати термінові запити.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "specialized_roles",
+    "title": "СПЕЦІАЛІЗОВАНІ РОЛІ",
+    "categories": [
+      {
+        "id": "education_learning",
+        "title": "Освіта та навчання",
+        "description": "Пояснення складних тем, персональні навчальні плани та вивчення мов.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "explain_topics",
+            "title": "Пояснювати складні теми, наукові роботи чи статті простими словами.",
+            "availableConnectors": []
+          },
+          {
+            "id": "study_plans",
+            "title": "Складати персональні навчальні плани та генерувати картки для вивчення мов.",
+            "availableConnectors": []
+          }
+        ]
+      },
+      {
+        "id": "life_personal_finance",
+        "title": "Життя та особисті фінанси",
+        "description": "Облік особистих витрат, категоризація чеків і планування подорожей.",
+        "icon": "",
+        "skills": [
+          {
+            "id": "expense_tracking",
+            "title": "Вести облік особистих витрат і категоризувати щомісячні чеки в таблиці.",
+            "availableConnectors": []
+          },
+          {
+            "id": "travel_planning",
+            "title": "Планувати маршрути подорожей, включно з перельотами, готелями та місцевими активностями.",
+            "availableConnectors": []
+          }
+        ]
+      }
+    ]
+  }
+]
