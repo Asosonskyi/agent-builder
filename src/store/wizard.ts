@@ -34,7 +34,7 @@ export interface WizardActions {
   resetWizard: () => void
 }
 
-export type WizardState = WizardData & WizardActions
+export type WizardState = WizardData & { actions: WizardActions }
 
 export function detectLocale(language = globalThis.navigator?.language ?? ""): Locale {
   return language.toLowerCase().startsWith("en") ? "en" : "uk"
@@ -67,90 +67,94 @@ export const useWizardStore = create<WizardState>()(
     (set, get) => ({
       ...initialData(detectLocale()),
 
-      setLocale: (locale) => set({ locale }),
+      actions: {
+        setLocale: (locale) => set({ locale }),
 
-      setGoal: (goalId) => set({ goalId }),
+        setGoal: (goalId) => set({ goalId }),
 
-      seedDefaults: (goal, catalog) => {
-        const skillIndex = indexCatalog(catalog)
-        const selections: WizardData["selections"] = {}
-        for (const { skillId, connectorIds } of goal.defaultSelectedSkills) {
-          const known = skillIndex.get(skillId)
-          if (!known) continue
-          selections[skillId] = {
-            categoryId: known.categoryId,
-            connectorIds: [...new Set(connectorIds)].filter((id) => known.connectorIds.has(id)),
+        seedDefaults: (goal, catalog) => {
+          const skillIndex = indexCatalog(catalog)
+          const selections: WizardData["selections"] = {}
+          for (const { skillId, connectorIds } of goal.defaultSelectedSkills) {
+            const known = skillIndex.get(skillId)
+            if (!known) continue
+            selections[skillId] = {
+              categoryId: known.categoryId,
+              connectorIds: [...new Set(connectorIds)].filter((id) => known.connectorIds.has(id)),
+            }
           }
-        }
-        set({ selections, selectionsGoalId: goal.id })
-      },
+          set({ selections, selectionsGoalId: goal.id })
+        },
 
-      // Persisted selections may outlive the catalog (a skill or connector removed by the API).
-      // Drops what no longer exists and leaves the state untouched when nothing changed.
-      pruneSelections: (catalog) => {
-        const skillIndex = indexCatalog(catalog)
-        const current = get().selections
-        const next: WizardData["selections"] = {}
-        let changed = false
-        for (const [skillId, selection] of Object.entries(current)) {
-          const known = skillIndex.get(skillId)
-          if (!known) {
-            changed = true
-            continue
+        // Persisted selections may outlive the catalog (a skill or connector removed by the API).
+        // Drops what no longer exists and leaves the state untouched when nothing changed.
+        pruneSelections: (catalog) => {
+          const skillIndex = indexCatalog(catalog)
+          const current = get().selections
+          const next: WizardData["selections"] = {}
+          let changed = false
+          for (const [skillId, selection] of Object.entries(current)) {
+            const known = skillIndex.get(skillId)
+            if (!known) {
+              changed = true
+              continue
+            }
+            const connectorIds = selection.connectorIds.filter((id) => known.connectorIds.has(id))
+            if (
+              known.categoryId !== selection.categoryId ||
+              connectorIds.length !== selection.connectorIds.length
+            ) {
+              changed = true
+              next[skillId] = { categoryId: known.categoryId, connectorIds }
+            } else next[skillId] = selection
           }
-          const connectorIds = selection.connectorIds.filter((id) => known.connectorIds.has(id))
-          if (
-            known.categoryId !== selection.categoryId ||
-            connectorIds.length !== selection.connectorIds.length
-          ) {
-            changed = true
-            next[skillId] = { categoryId: known.categoryId, connectorIds }
-          } else next[skillId] = selection
-        }
-        if (changed) set({ selections: next })
+          if (changed) set({ selections: next })
+        },
+
+        toggleSkill: (skillId, categoryId) =>
+          set(({ selections }) => {
+            const next = { ...selections }
+            if (next[skillId]) delete next[skillId]
+            else next[skillId] = { categoryId, connectorIds: [] }
+            return { selections: next }
+          }),
+
+        toggleConnector: (skillId, connectorId) =>
+          set(({ selections }) => {
+            const current = selections[skillId]
+            if (!current) return {}
+            const connectorIds = current.connectorIds.includes(connectorId)
+              ? current.connectorIds.filter((id) => id !== connectorId)
+              : [...current.connectorIds, connectorId]
+            return { selections: { ...selections, [skillId]: { ...current, connectorIds } } }
+          }),
+
+        selectAllInCategory: (category) =>
+          set(({ selections }) => {
+            const next = { ...selections }
+            for (const skill of category.skills)
+              next[skill.id] ??= { categoryId: category.id, connectorIds: [] }
+            return { selections: next }
+          }),
+
+        clearCategory: (categoryId) =>
+          set(({ selections }) => ({
+            selections: Object.fromEntries(
+              Object.entries(selections).filter(([, s]) => s.categoryId !== categoryId),
+            ),
+          })),
+
+        setContact: (contact) => set((s) => ({ contact: { ...s.contact, ...contact } })),
+
+        resetWizard: () => set((s) => initialData(s.locale)),
       },
-
-      toggleSkill: (skillId, categoryId) =>
-        set(({ selections }) => {
-          const next = { ...selections }
-          if (next[skillId]) delete next[skillId]
-          else next[skillId] = { categoryId, connectorIds: [] }
-          return { selections: next }
-        }),
-
-      toggleConnector: (skillId, connectorId) =>
-        set(({ selections }) => {
-          const current = selections[skillId]
-          if (!current) return {}
-          const connectorIds = current.connectorIds.includes(connectorId)
-            ? current.connectorIds.filter((id) => id !== connectorId)
-            : [...current.connectorIds, connectorId]
-          return { selections: { ...selections, [skillId]: { ...current, connectorIds } } }
-        }),
-
-      selectAllInCategory: (category) =>
-        set(({ selections }) => {
-          const next = { ...selections }
-          for (const skill of category.skills)
-            next[skill.id] ??= { categoryId: category.id, connectorIds: [] }
-          return { selections: next }
-        }),
-
-      clearCategory: (categoryId) =>
-        set(({ selections }) => ({
-          selections: Object.fromEntries(
-            Object.entries(selections).filter(([, s]) => s.categoryId !== categoryId),
-          ),
-        })),
-
-      setContact: (contact) => set((s) => ({ contact: { ...s.contact, ...contact } })),
-
-      resetWizard: () => set((s) => initialData(s.locale)),
     }),
     {
       name: PERSIST_KEY,
       version: PERSIST_VERSION,
       storage: createJSONStorage(() => localStorage),
+      // Keep `actions` out of storage: it would be saved as `{}` and the shallow merge on rehydrate
+      // would replace the real actions with it.
       partialize: ({ locale, goalId, selectionsGoalId, selections, contact }): WizardData => ({
         locale,
         goalId,
@@ -170,3 +174,6 @@ export const useWizardStore = create<WizardState>()(
     },
   ),
 )
+
+/** Stable reference: safe to destructure, never triggers a re-render. */
+export const useWizardActions = () => useWizardStore((s) => s.actions)

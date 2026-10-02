@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input"
 import { SummaryPanel } from "@/routes/wizard/components/SummaryPanel"
 import { WizardFooter } from "@/routes/wizard/components/WizardFooter"
 import { WizardLayout } from "@/routes/wizard/components/WizardLayout"
-import { useWizardStore } from "@/store/wizard"
+import { useWizardActions, useWizardStore } from "@/store/wizard"
 import type { SkillsLocationState } from "@/routes/wizard/guards"
 
 const FORM_ID = "contact-form"
@@ -26,9 +26,7 @@ export default function ContactStep() {
   // RequireGoal + RequireSkills guarantee a goal with selections here.
   const goalId = useWizardStore((s) => s.goalId) ?? ""
   const savedContact = useWizardStore((s) => s.contact)
-  const setContact = useWizardStore((s) => s.setContact)
-  const resetWizard = useWizardStore((s) => s.resetWizard)
-  const pruneSelections = useWizardStore((s) => s.pruneSelections)
+  const { setContact, resetWizard, pruneSelections } = useWizardActions()
 
   const goal = useGoals().data?.find((g) => g.id === goalId)
   const catalog = useCategories(goalId).data

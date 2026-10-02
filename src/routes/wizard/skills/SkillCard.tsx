@@ -4,21 +4,22 @@ import { useTranslation } from "react-i18next"
 import type { Skill } from "@/api/schemas"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { useWizardStore } from "@/store/wizard"
+import { useWizardActions, useWizardStore } from "@/store/wizard"
 import { ConnectorChips } from "./ConnectorChips"
 
 export function SkillCard({ skill, categoryId }: { skill: Skill; categoryId: string }) {
   const { t } = useTranslation()
   const selection = useWizardStore((s) => s.selections[skill.id])
-  const toggleSkill = useWizardStore((s) => s.toggleSkill)
-  const toggleConnector = useWizardStore((s) => s.toggleConnector)
+  const { toggleSkill, toggleConnector } = useWizardActions()
   const checked = Boolean(selection)
 
   return (
     <li
       className={cn(
         "border px-4 py-4 transition-colors",
-        checked ? "border-2 border-brand bg-brand-tint px-[15px] py-[15px]" : "border-line hover:border-brand",
+        checked
+          ? "border-2 border-brand bg-brand-tint px-[15px] py-[15px]"
+          : "border-line hover:border-brand",
       )}
     >
       <label className="flex cursor-pointer items-start gap-3 text-base text-ink">

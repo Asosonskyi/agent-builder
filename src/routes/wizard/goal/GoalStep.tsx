@@ -10,14 +10,14 @@ import { GoalPreview } from "./GoalPreview"
 import { ButtonLink } from "@/components/common/ButtonLink"
 import { WizardFooter } from "@/routes/wizard/components/WizardFooter"
 import { WizardLayout } from "@/routes/wizard/components/WizardLayout"
-import { useWizardStore } from "@/store/wizard"
+import { useWizardActions, useWizardStore } from "@/store/wizard"
 
 export default function GoalStep() {
   const { t } = useTranslation()
   const goals = useGoals()
   const goalId = useWizardStore((s) => s.goalId)
   const locale = useWizardStore((s) => s.locale)
-  const setGoal = useWizardStore((s) => s.setGoal)
+  const { setGoal } = useWizardActions()
   const queryClient = useQueryClient()
   const selectedGoal = goals.data?.find((g) => g.id === goalId)
 

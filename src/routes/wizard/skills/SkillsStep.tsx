@@ -13,7 +13,7 @@ import { SummaryPanel } from "@/routes/wizard/components/SummaryPanel"
 import { WizardFooter } from "@/routes/wizard/components/WizardFooter"
 import { WizardLayout } from "@/routes/wizard/components/WizardLayout"
 import { canContinueFromSkills } from "@/store/selectors"
-import { DEFAULT_GOAL_ID, useWizardStore, type WizardData } from "@/store/wizard"
+import { DEFAULT_GOAL_ID, useWizardActions, useWizardStore, type WizardData } from "@/store/wizard"
 import type { SkillsLocationState } from "@/routes/wizard/guards"
 import { SkillsSkeleton } from "./SkillsSkeleton"
 
@@ -37,9 +37,7 @@ function SkillsStepContent({ goalId }: { goalId: string }) {
 
   const selections = useWizardStore((s) => s.selections)
   const selectionsGoalId = useWizardStore((s) => s.selectionsGoalId)
-  const seedDefaults = useWizardStore((s) => s.seedDefaults)
-  const pruneSelections = useWizardStore((s) => s.pruneSelections)
-  const setGoal = useWizardStore((s) => s.setGoal)
+  const { seedDefaults, pruneSelections, setGoal } = useWizardActions()
   const needsSeed = selectionsGoalId !== goalId
 
   // Plan §6.1: seed once per goal, in a single update, before paint (no empty-then-filled flicker).

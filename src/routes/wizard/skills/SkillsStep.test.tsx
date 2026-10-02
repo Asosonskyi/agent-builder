@@ -11,7 +11,7 @@ import SkillsStep from "./SkillsStep"
 beforeEach(() => {
   localStorage.clear()
   useWizardStore.setState(useWizardStore.getInitialState(), true)
-  useWizardStore.getState().setLocale("en")
+  useWizardStore.getState().actions.setLocale("en")
 })
 
 const renderSkills = () => {

@@ -8,12 +8,12 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useWizardStore } from "@/store/wizard"
+import { useWizardActions, useWizardStore } from "@/store/wizard"
 
 export function LanguageSwitcher() {
   const { t } = useTranslation()
   const locale = useWizardStore((s) => s.locale)
-  const setLocale = useWizardStore((s) => s.setLocale)
+  const { setLocale } = useWizardActions()
 
   return (
     <DropdownMenu>

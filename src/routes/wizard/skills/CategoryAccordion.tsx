@@ -5,14 +5,13 @@ import type { Category } from "@/api/schemas"
 import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
 import { AccordionItem } from "@/components/ui/accordion"
 import { isCategoryFullySelected } from "@/store/selectors"
-import { useWizardStore } from "@/store/wizard"
+import { useWizardActions, useWizardStore } from "@/store/wizard"
 import { SkillCard } from "./SkillCard"
 
 export function CategoryAccordion({ category }: { category: Category }) {
   const { t } = useTranslation()
   const allSelected = useWizardStore((s) => isCategoryFullySelected(category, s.selections))
-  const selectAllInCategory = useWizardStore((s) => s.selectAllInCategory)
-  const clearCategory = useWizardStore((s) => s.clearCategory)
+  const { selectAllInCategory, clearCategory } = useWizardActions()
 
   return (
     <AccordionItem

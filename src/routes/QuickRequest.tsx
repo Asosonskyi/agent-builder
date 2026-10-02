@@ -66,12 +66,7 @@ export default function QuickRequest() {
             </p>
           )}
           <div>
-            <Button
-              size="xl"
-              type="submit"
-              disabled={submit.isPending}
-              className="max-sm:w-full"
-            >
+            <Button size="xl" type="submit" disabled={submit.isPending} className="max-sm:w-full">
               {submit.isPending ? t("common.sending") : t("quick.submit")}
               {submit.isPending && <LoaderCircleIcon className="animate-spin" />}
             </Button>

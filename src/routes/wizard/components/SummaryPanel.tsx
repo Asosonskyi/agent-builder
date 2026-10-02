@@ -6,7 +6,7 @@ import type { CategoryGroup, Goal } from "@/api/schemas"
 import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
 import { Skeleton } from "@/components/common/Skeleton"
 import { selectedByCategory, type SelectedCategory } from "@/store/selectors"
-import { useWizardStore } from "@/store/wizard"
+import { useWizardActions, useWizardStore } from "@/store/wizard"
 
 interface SummaryPanelProps {
   goal: Goal | undefined
@@ -68,7 +68,7 @@ function SummaryCategory({
   disabled?: boolean
 }) {
   const { t } = useTranslation()
-  const clearCategory = useWizardStore((s) => s.clearCategory)
+  const { clearCategory } = useWizardActions()
   const [expanded, setExpanded] = useState(true)
   const listId = `summary-${item.category.id}`
   const linkClass =
