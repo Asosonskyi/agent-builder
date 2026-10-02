@@ -11,11 +11,12 @@ import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useWizardStore } from "@/store/wizard"
+import { useLocale } from "@/locale/useLocale"
 
 export default function QuickRequest() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { locale } = useLocale()
   const form = useForm<QuickRequestValues>({
     resolver: zodResolver(quickRequestSchema),
     defaultValues: { name: "", email: "", agentName: "", reason: "" },
@@ -28,9 +29,7 @@ export default function QuickRequest() {
     onSuccess: () => navigate("/success", { state: { submitted: true }, replace: true }),
   })
 
-  const onSubmit = form.handleSubmit((values) =>
-    submit.mutate({ ...values, locale: useWizardStore.getState().locale }),
-  )
+  const onSubmit = form.handleSubmit((values) => submit.mutate({ ...values, locale }))
 
   return (
     <main className="mx-auto grid w-full max-w-page flex-1 grid-cols-1 content-start gap-12 pb-12 lg:grid-cols-[580fr_548fr] lg:content-stretch lg:items-center">

@@ -1,10 +1,10 @@
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
-import type { Category, CategoryGroup, Contact, Goal, Locale } from "@/api/schemas"
+import type { Category, CategoryGroup, Contact, Goal } from "@/api/schemas"
 
 export const DEFAULT_GOAL_ID = "all_in_one"
 export const PERSIST_KEY = "scope-builder-wizard"
-const PERSIST_VERSION = 1
+const PERSIST_VERSION = 2
 
 export interface SkillSelectionState {
   categoryId: string
@@ -12,7 +12,6 @@ export interface SkillSelectionState {
 }
 
 export interface WizardData {
-  locale: Locale
   goalId: string | null
   /** Goal the current selections were seeded for (see plan §6.1). */
   selectionsGoalId: string | null
@@ -22,7 +21,6 @@ export interface WizardData {
 }
 
 export interface WizardActions {
-  setLocale: (locale: Locale) => void
   setGoal: (goalId: string) => void
   seedDefaults: (goal: Goal, catalog: CategoryGroup[]) => void
   pruneSelections: (catalog: CategoryGroup[]) => void
@@ -36,12 +34,7 @@ export interface WizardActions {
 
 export type WizardState = WizardData & { actions: WizardActions }
 
-export function detectLocale(language = globalThis.navigator?.language ?? ""): Locale {
-  return language.toLowerCase().startsWith("en") ? "en" : "uk"
-}
-
-const initialData = (locale: Locale): WizardData => ({
-  locale,
+const initialData = (): WizardData => ({
   goalId: DEFAULT_GOAL_ID,
   selectionsGoalId: null,
   selections: {},
@@ -65,11 +58,9 @@ function indexCatalog(catalog: CategoryGroup[]): CatalogIndex {
 export const useWizardStore = create<WizardState>()(
   persist(
     (set, get) => ({
-      ...initialData(detectLocale()),
+      ...initialData(),
 
       actions: {
-        setLocale: (locale) => set({ locale }),
-
         setGoal: (goalId) => set({ goalId }),
 
         seedDefaults: (goal, catalog) => {
@@ -146,7 +137,7 @@ export const useWizardStore = create<WizardState>()(
 
         setContact: (contact) => set((s) => ({ contact: { ...s.contact, ...contact } })),
 
-        resetWizard: () => set((s) => initialData(s.locale)),
+        resetWizard: () => set(initialData()),
       },
     }),
     {
@@ -155,21 +146,20 @@ export const useWizardStore = create<WizardState>()(
       storage: createJSONStorage(() => localStorage),
       // Keep `actions` out of storage: it would be saved as `{}` and the shallow merge on rehydrate
       // would replace the real actions with it.
-      partialize: ({ locale, goalId, selectionsGoalId, selections, contact }): WizardData => ({
-        locale,
+      partialize: ({ goalId, selectionsGoalId, selections, contact }): WizardData => ({
         goalId,
         selectionsGoalId,
         selections,
         contact,
       }),
-      // Zustand calls `migrate` only when the stored version differs from PERSIST_VERSION, so any
-      // other version falls back to a fresh wizard, keeping a valid locale. Same-version data is
-      // merged as-is; selections are re-checked against the catalog by `pruneSelections`.
-      migrate: (persisted) => {
-        const old = persisted as Partial<WizardData> | undefined
-        return initialData(
-          old?.locale === "en" || old?.locale === "uk" ? old.locale : detectLocale(),
-        )
+      // Zustand calls `migrate` only when the stored version differs from PERSIST_VERSION.
+      // v1 also held the locale (now in LocaleProvider): drop it and keep the progress. Any other
+      // version falls back to a fresh wizard. Same-version data is merged as-is; selections are
+      // re-checked against the catalog by `pruneSelections`.
+      migrate: (persisted, version) => {
+        if (version !== 1 || !persisted || typeof persisted !== "object") return initialData()
+        const { goalId, selectionsGoalId, selections, contact } = persisted as WizardData
+        return { ...initialData(), goalId, selectionsGoalId, selections, contact }
       },
     },
   ),

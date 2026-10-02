@@ -1,5 +1,5 @@
 import { keepPreviousData, queryOptions, useQuery } from "@tanstack/react-query"
-import { useWizardStore } from "@/store/wizard"
+import { useLocale } from "@/locale/useLocale"
 import { getCategories, getGoals } from "./catalog"
 import type { Locale } from "./schemas"
 
@@ -23,11 +23,11 @@ export const categoriesQuery = (goalId: string, locale: Locale) =>
   })
 
 export function useGoals() {
-  const locale = useWizardStore((s) => s.locale)
+  const { locale } = useLocale()
   return useQuery(goalsQuery(locale))
 }
 
 export function useCategories(goalId: string) {
-  const locale = useWizardStore((s) => s.locale)
+  const { locale } = useLocale()
   return useQuery(categoriesQuery(goalId, locale))
 }

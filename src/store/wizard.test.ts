@@ -64,14 +64,6 @@ describe("default seeding", () => {
     expect(store().selectionsGoalId).toBe("personal")
   })
 
-  it("does not re-seed when the language changes", () => {
-    visitSkills()
-    actions().toggleSkill("prep", "meetings")
-    actions().setLocale(store().locale === "en" ? "uk" : "en")
-    visitSkills()
-    expect(Object.keys(store().selections).sort()).toEqual(["prep", "research", "summaries"])
-  })
-
   it("filters out unknown skill and connector IDs", () => {
     actions().seedDefaults(
       goal("all_in_one", [
@@ -140,17 +132,44 @@ describe("pruneSelections", () => {
 })
 
 describe("resetWizard", () => {
-  it("clears everything except the locale", () => {
-    actions().setLocale("en")
+  it("clears everything", () => {
     visitSkills()
     actions().setContact({ name: "Ann", email: "ann@example.com" })
     actions().resetWizard()
     expect(store()).toMatchObject({
-      locale: "en",
       goalId: "all_in_one",
       selectionsGoalId: null,
       selections: {},
       contact: { name: "", email: "", company: "" },
     })
+  })
+})
+
+describe("persist migration", () => {
+  const rehydrateFrom = async (state: object, version: number) => {
+    localStorage.setItem(PERSIST_KEY, JSON.stringify({ state, version }))
+    await useWizardStore.persist.rehydrate()
+  }
+
+  it("keeps v1 progress and drops the locale (now owned by LocaleProvider)", async () => {
+    const selections = { research: { categoryId: "search", connectorIds: ["firecrawl"] } }
+    const contact = { name: "Ann", email: "ann@example.com", company: "" }
+    await rehydrateFrom(
+      { locale: "en", goalId: "personal", selectionsGoalId: "personal", selections, contact },
+      1,
+    )
+    expect(store()).toMatchObject({
+      goalId: "personal",
+      selectionsGoalId: "personal",
+      selections,
+      contact,
+    })
+    expect(store()).not.toHaveProperty("locale")
+    expect(JSON.parse(localStorage.getItem(PERSIST_KEY)!).state).not.toHaveProperty("locale")
+  })
+
+  it("starts a fresh wizard from an unknown version", async () => {
+    await rehydrateFrom({ goalId: "personal", selectionsGoalId: "personal" }, 0)
+    expect(store()).toMatchObject({ goalId: "all_in_one", selectionsGoalId: null, selections: {} })
   })
 })

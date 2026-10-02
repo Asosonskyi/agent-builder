@@ -3,16 +3,23 @@ import { render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { createMemoryRouter, RouterProvider } from "react-router"
 import { beforeEach, expect, it } from "vitest"
-import "@/i18n"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { LocaleProvider } from "@/locale/LocaleProvider"
+import { LOCALE_STORAGE_KEY } from "@/locale/storage"
+import { useLocale } from "@/locale/useLocale"
 import { useWizardStore } from "@/store/wizard"
 import SkillsStep from "./SkillsStep"
 
 beforeEach(() => {
   localStorage.clear()
   useWizardStore.setState(useWizardStore.getInitialState(), true)
-  useWizardStore.getState().actions.setLocale("en")
+  localStorage.setItem(LOCALE_STORAGE_KEY, "en")
 })
+
+function SwitchToUkrainian() {
+  const { setLocale } = useLocale()
+  return <button onClick={() => setLocale("uk")}>Switch to Ukrainian</button>
+}
 
 const renderSkills = () => {
   const router = createMemoryRouter(
@@ -23,11 +30,14 @@ const renderSkills = () => {
     { initialEntries: ["/skills"] },
   )
   render(
-    <QueryClientProvider client={new QueryClient()}>
-      <TooltipProvider>
-        <RouterProvider router={router} />
-      </TooltipProvider>
-    </QueryClientProvider>,
+    <LocaleProvider>
+      <QueryClientProvider client={new QueryClient()}>
+        <TooltipProvider>
+          <SwitchToUkrainian />
+          <RouterProvider router={router} />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </LocaleProvider>,
   )
 }
 
@@ -47,4 +57,19 @@ it("lands with defaults selected and disables the primary button at 0 skills", a
 
   expect(screen.queryAllByRole("checkbox", { checked: true })).toHaveLength(0)
   expect(next).toBeDisabled()
+})
+
+it("keeps the user's selections when the language changes (no re-seed)", async () => {
+  const user = userEvent.setup()
+  renderSkills()
+
+  const [first] = await screen.findAllByRole("checkbox", { checked: true })
+  await user.click(first)
+  expect(screen.getAllByRole("checkbox", { checked: true })).toHaveLength(2)
+
+  await user.click(screen.getByRole("button", { name: "Switch to Ukrainian" }))
+  await screen.findAllByText("Пошук, документи та знання")
+
+  expect(screen.getAllByRole("checkbox", { checked: true })).toHaveLength(2)
+  expect(document.documentElement.lang).toBe("uk")
 })

@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input"
 import { SummaryPanel } from "@/routes/wizard/components/SummaryPanel"
 import { WizardFooter } from "@/routes/wizard/components/WizardFooter"
 import { WizardLayout } from "@/routes/wizard/components/WizardLayout"
+import { useLocale } from "@/locale/useLocale"
 import { useWizardActions, useWizardStore } from "@/store/wizard"
 import type { SkillsLocationState } from "@/routes/wizard/guards"
 
@@ -27,6 +28,7 @@ export default function ContactStep() {
   const goalId = useWizardStore((s) => s.goalId) ?? ""
   const savedContact = useWizardStore((s) => s.contact)
   const { setContact, resetWizard, pruneSelections } = useWizardActions()
+  const { locale } = useLocale()
 
   const goal = useGoals().data?.find((g) => g.id === goalId)
   const catalog = useCategories(goalId).data
@@ -58,7 +60,7 @@ export default function ContactStep() {
   const locked = submit.isPending
 
   const onSubmit = form.handleSubmit((contact) => {
-    const { locale, selections } = useWizardStore.getState()
+    const { selections } = useWizardStore.getState()
     const payload: EstimatePayload = {
       locale,
       goalId,

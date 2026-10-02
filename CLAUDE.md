@@ -46,7 +46,7 @@ Mock fixtures in `src/api/mocks/` are JSON. Keep IDs identical across `en/` and 
 - **Two kinds of text:**
   - UI strings come from react-i18next (`src/i18n/locales/{uk,en}.json`).
   - Content (goals, categories, skills, connectors) comes **already localized from the API**, one locale per request.
-  - The locale is never in the URL. It lives in the persisted Zustand store.
+  - The locale is never in the URL. It lives in `LocaleProvider` (`src/locale/`, read it with `useLocale()`), persisted under `scope-builder-locale`, separate from the wizard store.
 - **API layer** (`src/api/`): `client.ts` switches between mocks and real fetch via `VITE_API_MODE=mock|live`. Every response is parsed with Zod and throws on a mismatch.
   - Mocks live in `src/api/mocks/{uk,en}/`. **IDs must be identical across locales.**
   - `submitEstimate` is demo-only: it logs the payload and resolves after about 800 ms.
@@ -61,7 +61,7 @@ Mock fixtures in `src/api/mocks/` are JSON. Keep IDs identical across `en/` and 
   - `/skills` needs a `goalId`.
   - `/contact` needs at least one selected skill.
   - `/success` needs `location.state.submitted`.
-  - A successful submit calls `resetWizard()` (which keeps the locale), then navigates to `/success` with `replace`.
+  - A successful submit calls `resetWizard()`, then navigates to `/success` with `replace`.
 - **GitHub Pages:** set `base: '/<repo-name>/'` in `vite.config.ts`. The deploy workflow copies `dist/index.html` → `dist/404.html` so deep links survive a refresh. Build with `VITE_API_MODE=mock`.
 
 ## Design

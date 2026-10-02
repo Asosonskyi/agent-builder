@@ -244,8 +244,7 @@ Skills for other categories, Ukrainian texts, and per-goal defaults for Personal
 
 ```ts
 interface WizardState {
-  version: 1;
-  locale: Locale;                                   // default: 'uk' (see open questions)
+  version: 2;                                       // v1 also held `locale`; migrate drops it, keeps progress
   goalId: string | null;
   selectionsGoalId: string | null;                  // goal the selections were seeded for
   selections: Record<string /*skillId*/, { categoryId: string; connectorIds: string[] }>;
@@ -253,11 +252,11 @@ interface WizardState {
 }
 ```
 - Persist key: `scope-builder-wizard`. Include `version` + `migrate` from day one.
+- The locale is **not** wizard state: it lives in `LocaleProvider` (see §7).
 - Persist `contact` so a reload on Step 3 keeps typed values.
 - Selections store **IDs only** — labels always come from the current-locale catalog.
 
 ### Actions
-- `setLocale(locale)`
 - `setGoal(goalId)`
 - `seedDefaults(goal, catalog)` — see 6.1
 - `toggleSkill(skillId, categoryId)` — unchecking removes its connectors too
@@ -265,7 +264,7 @@ interface WizardState {
 - `selectAllInCategory(category)`
 - `clearCategory(categoryId)`
 - `setContact(partial)`
-- `resetWizard()` — clears everything **except `locale`**
+- `resetWizard()` — clears all wizard state
 
 ### Selectors
 - `selectedSkillCount`, `canContinueFromSkills = selectedSkillCount > 0`
@@ -294,14 +293,14 @@ Goal: the user never lands on Step 2 with a disabled primary button.
 
 ## 7. Internationalization
 
-- Languages: `uk`, `en`. No locale in URL. Current locale lives in the Zustand store (persisted).
+- Languages: `uk`, `en`. No locale in URL. Current locale lives in `LocaleProvider` (`src/locale/`, React context, read with `useLocale()`), persisted in localStorage under `scope-builder-locale`. It is independent of the wizard store.
 - **UI strings** (titles, buttons, labels, tooltip, validation messages): `src/i18n/locales/uk.json`, `en.json` via react-i18next. Maintained by developers.
 - **Content** (goals, categories, skills, connectors): fetched per locale from the API.
   - TanStack Query keys include the locale: `['goals', locale]`, `['categories', goalId, locale]`.
   - Use `placeholderData: keepPreviousData` so switching language keeps old content visible until the new one arrives (skeleton only on first load).
-- On `setLocale`: call `i18n.changeLanguage(locale)` and set `<html lang>`.
+- On `setLocale`: the provider persists the locale, calls `i18n.changeLanguage(locale)` and sets `<html lang>` (in a layout effect, before paint).
 - Language switcher label shows the current code (`UK` / `EN`).
-- Because Zustand reads localStorage synchronously, the persisted locale is known before the first render — no flash of the wrong language.
+- `getInitialLocale()` reads localStorage synchronously (falls back to browser detection, §13.1), and i18n is initialised with it, so the locale is known before the first render — no flash of the wrong language.
 
 ---
 
@@ -351,6 +350,11 @@ src/
   store/
     wizard.ts
     selectors.ts
+  locale/
+    storage.ts          # detectLocale, read/write persisted locale, getInitialLocale
+    context.ts
+    LocaleProvider.tsx
+    useLocale.ts
   i18n/
     index.ts
     locales/en.json
@@ -411,7 +415,7 @@ e2e/
   - Primary button disabled at 0 skills.
   - Unchecking a skill removes its connectors.
   - Category `×` clears only that category.
-  - `resetWizard` keeps locale.
+  - `resetWizard` clears all wizard state; v1 → v2 migration keeps progress.
 - Playwright: landing → goal → skills (keep defaults) → contact → submit → success; reload on `/success` redirects to `/`.
 - Loading/error states.
 
@@ -425,7 +429,7 @@ e2e/
 ## 13. Open questions
 
 ### Resolved (2026-10-01)
-1. **Default locale:** from browser language (`uk*` → `uk`, `en*` → `en`, anything else → `uk`). Persisted after that.
+1. **Default locale:** from browser language (`uk*` → `uk`, `en*` → `en`, anything else → `uk`). Persisted after that (`scope-builder-locale`).
 2. **Step 1 default:** All-in-One (`all_in_one`) is pre-selected on first visit; "Choose skills" is always enabled.
 3. **"Select all skills"** becomes **"Unselect all skills"** when every skill in the category is selected (per `docs/design/Step 2 - Personal - Skills.png`).
 4. **Removing the last category on Step 3** → redirect to `/skills` (same rule as the route guard).
