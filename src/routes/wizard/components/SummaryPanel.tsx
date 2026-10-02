@@ -33,9 +33,7 @@ export function SummaryPanel({ goal, catalog, onChangeCategory, disabled }: Summ
             className="size-14 shrink-0 bg-background sm:size-20"
           />
           <div className="flex min-w-0 flex-col gap-2">
-            <h2 className="text-xl font-semibold leading-tight text-ink sm:text-[1.75rem]">
-              {goal.title}
-            </h2>
+            <h2 className="text-xl leading-tight text-ink sm:text-[1.75rem]">{goal.title}</h2>
             <p className="text-base text-ink-muted">{goal.description}</p>
           </div>
         </div>
@@ -43,7 +41,7 @@ export function SummaryPanel({ goal, catalog, onChangeCategory, disabled }: Summ
         <Skeleton className="h-20 w-full" />
       )}
 
-      <h3 className="mt-8 text-xl font-semibold text-ink sm:mt-10">{t("summary.willDo")}</h3>
+      <h3 className="mt-8 text-xl text-ink sm:mt-10">{t("summary.willDo")}</h3>
       <ul className="mt-5 flex flex-col">
         {selected.map((item) => (
           <SummaryCategory
@@ -79,13 +77,13 @@ function SummaryCategory({
   return (
     <li className="border-b border-line pb-4 not-first:pt-4">
       <div className="flex items-start justify-between gap-4">
-        <h4 className="text-base font-semibold text-ink">{item.category.title}</h4>
+        <h4 className="text-base text-ink">{item.category.title}</h4>
         <button
           type="button"
           aria-label={t("summary.remove", { title: item.category.title })}
           onClick={() => clearCategory(item.category.id)}
           disabled={disabled}
-          className="text-ink outline-none hover:text-danger focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
+          className="text-ink outline-none hover:text-brand focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 cursor-pointer"
         >
           <XIcon className="size-5" />
         </button>
@@ -96,7 +94,10 @@ function SummaryCategory({
           type="button"
           onClick={onChange}
           disabled={disabled}
-          className={cn(linkClass, "disabled:pointer-events-none disabled:opacity-50")}
+          className={cn(
+            linkClass,
+            "disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+          )}
         >
           {t("summary.change")}
         </button>
@@ -106,7 +107,7 @@ function SummaryCategory({
           aria-expanded={expanded}
           aria-controls={listId}
           onClick={() => setExpanded((v) => !v)}
-          className={linkClass}
+          className={cn(linkClass, "cursor-pointer")}
         >
           {expanded ? t("summary.hide") : t("summary.show")}
         </button>
@@ -114,7 +115,7 @@ function SummaryCategory({
       {expanded && (
         <ul id={listId} className="mt-4 flex list-disc flex-col gap-1 pl-5 text-sm text-ink">
           {item.skills.map((skill) => (
-            <li key={skill.id} className="text-sm font-medium">
+            <li key={skill.id} className="text-sm">
               {skill.title}
             </li>
           ))}

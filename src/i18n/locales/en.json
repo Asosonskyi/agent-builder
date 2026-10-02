@@ -6,8 +6,7 @@
     "language": "Language",
     "cta": {
       "getEstimate": "Get estimate",
-      "quickRequest": "Quick request",
-      "anotherWay": "Another way"
+      "quickRequest": "Quick request"
     }
   },
   "languages": { "uk": "Українська", "en": "English" },

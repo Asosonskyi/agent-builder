@@ -12,7 +12,7 @@ export default function Landing() {
           <AlarmClockIcon className="size-5 shrink-0" />
           {t("landing.badge")}
         </p>
-        <h1 className="mt-8 text-[2rem] leading-[1.1] font-medium tracking-tight text-ink sm:mt-10 sm:text-[2.75rem]">
+        <h1 className="mt-8 text-[2rem] leading-[1.1] tracking-tight text-ink sm:mt-10 sm:text-[2.75rem]">
           <span className="text-brand">{t("landing.titleAccent")}</span>
           {t("landing.titleRest")}
         </h1>

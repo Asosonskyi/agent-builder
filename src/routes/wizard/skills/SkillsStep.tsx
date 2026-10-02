@@ -5,7 +5,6 @@ import { Navigate, useLocation, useNavigate } from "react-router"
 import { useCategories, useGoals } from "@/api/queries"
 import type { CategoryGroup as CategoryGroupData } from "@/api/schemas"
 import { ErrorState } from "@/components/common/ErrorState"
-import { Skeleton } from "@/components/common/Skeleton"
 import { CategoryGroup } from "./CategoryGroup"
 import { Accordion } from "@/components/ui/accordion"
 import { ButtonLink } from "@/components/common/ButtonLink"
@@ -16,6 +15,7 @@ import { WizardLayout } from "@/routes/wizard/components/WizardLayout"
 import { canContinueFromSkills } from "@/store/selectors"
 import { DEFAULT_GOAL_ID, useWizardStore, type WizardData } from "@/store/wizard"
 import type { SkillsLocationState } from "@/routes/wizard/guards"
+import { SkillsSkeleton } from "./SkillsSkeleton"
 
 export default function SkillsStep() {
   const goalId = useWizardStore((s) => s.goalId)
@@ -138,7 +138,7 @@ function SkillsStepContent({ goalId }: { goalId: string }) {
             )}
           </>
         ) : (
-          <SkillsSkeleton />
+          <SkillsSkeleton count={4} />
         )}
       </div>
     </WizardLayout>
@@ -158,21 +158,4 @@ function initiallyExpanded(
   const ids = new Set(Object.values(selections).map((s) => s.categoryId))
   if (focusCategoryId) ids.add(focusCategoryId)
   return catalog.flatMap((g) => g.categories.map((c) => c.id)).filter((id) => ids.has(id))
-}
-
-function SkillsSkeleton() {
-  return (
-    <div className="flex flex-col gap-6" aria-busy>
-      <Skeleton className="h-4 w-48" />
-      {[0, 1, 2, 3].map((i) => (
-        <div key={i} className="flex gap-3 sm:gap-4">
-          <Skeleton className="size-14 shrink-0 sm:size-20" />
-          <div className="flex flex-1 flex-col gap-3 pt-1">
-            <Skeleton className="h-6 w-2/3" />
-            <Skeleton className="h-4 w-full" />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
 }

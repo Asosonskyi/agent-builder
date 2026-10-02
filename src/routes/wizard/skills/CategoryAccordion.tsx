@@ -21,13 +21,13 @@ export function CategoryAccordion({ category }: { category: Category }) {
       className="scroll-mt-6 border-b border-line py-5 not-last:border-b sm:py-6"
     >
       <AccordionPrimitive.Header>
-        <AccordionPrimitive.Trigger className="group flex w-full items-start gap-3 text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:gap-4">
+        <AccordionPrimitive.Trigger className="group flex w-full items-start gap-3 text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:gap-4 cursor-pointer">
           <ImagePlaceholder src={category.icon} className="size-14 shrink-0 sm:size-20" />
           <span className="flex min-w-0 flex-1 flex-col gap-1 pt-1 sm:gap-2">
             <span className="text-lg font-semibold text-ink sm:text-xl">{category.title}</span>
             <span className="text-sm text-ink-muted sm:text-base">{category.description}</span>
           </span>
-          <span className="self-center text-ink">
+          <span className="self-center text-ink transition-colors group-hover:text-brand">
             <PlusIcon className="size-6 group-data-panel-open:hidden" />
             <MinusIcon className="hidden size-6 group-data-panel-open:block" />
           </span>

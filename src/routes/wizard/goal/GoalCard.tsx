@@ -16,7 +16,7 @@ export function GoalCard({ goal, checked, onSelect }: GoalCardProps) {
         "flex cursor-pointer items-center gap-3 border p-3 transition-colors has-focus-visible:ring-3 has-focus-visible:ring-ring/50 sm:gap-4 sm:p-4 short:p-3",
         checked
           ? "border-2 border-brand bg-brand-tint p-2.75 sm:p-3.75 short:p-2.75"
-          : "border-line hover:border-ink-subtle",
+          : "border-line hover:border-brand",
       )}
     >
       <input

@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router"
 import { ButtonLink } from "@/components/common/ButtonLink"
 
-type CtaKey = "getEstimate" | "quickRequest" | "anotherWay"
+type CtaKey = "getEstimate" | "quickRequest"
 
 const CTA_BY_PATH: Record<string, CtaKey> = {
   "/goal": "quickRequest",
   "/skills": "quickRequest",
-  "/contact": "anotherWay",
+  "/contact": "quickRequest",
 }
 
 export function HeaderCta() {

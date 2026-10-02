@@ -28,6 +28,7 @@
   --panel: #f7f7f7;
   --placeholder: #efefef;
   --danger: #d93025;
+  --border-grey: #dde1e6;
 
   /* shadcn semantic tokens, mapped onto the brand tokens above */
   --radius: 0rem;
@@ -64,6 +65,7 @@
   --color-ink-subtle: var(--ink-subtle);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-border-grey: var(--border-grey);
   --color-panel: var(--panel);
   --color-placeholder: var(--placeholder);
   --color-danger: var(--danger);
@@ -106,6 +108,14 @@
     @apply font-sans;
   }
   body {
-    @apply min-w-80 bg-background text-foreground antialiased;
+    @apply min-w-80 bg-background font-medium text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold;
   }
 }

@@ -108,14 +108,14 @@ export default function ContactStep() {
               size="xl"
               to="/skills"
               disabled={locked}
-              className="max-sm:px-4 font-medium"
+              className="max-sm:px-4"
             >
               <ArrowLeftIcon />
               <span className="max-sm:sr-only">{t("contact.back")}</span>
             </ButtonLink>
           }
           next={
-            <Button size="xl" type="submit" className="font-medium" form={FORM_ID} disabled={locked || !catalog}>
+            <Button size="xl" type="submit" form={FORM_ID} disabled={locked || !catalog}>
               {locked ? t("common.sending") : t("contact.submit")}
               {locked ? <LoaderCircleIcon className="animate-spin" /> : <ArrowRightIcon />}
             </Button>

@@ -6,8 +6,7 @@
     "language": "Мова",
     "cta": {
       "getEstimate": "Отримати оцінку",
-      "quickRequest": "Швидкий запит",
-      "anotherWay": "Інший спосіб"
+      "quickRequest": "Швидкий запит"
     }
   },
   "languages": { "uk": "Українська", "en": "English" },

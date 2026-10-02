@@ -35,7 +35,7 @@ export default function QuickRequest() {
   return (
     <main className="mx-auto grid w-full max-w-page flex-1 grid-cols-1 content-start gap-12 pb-12 lg:grid-cols-[580fr_548fr] lg:content-stretch lg:items-center">
       <section className="flex flex-col justify-center">
-        <h1 className="text-[1.75rem] leading-[1.2] font-medium tracking-tight text-ink sm:text-[2.25rem] lg:text-[2.5rem]">
+        <h1 className="text-[1.75rem] leading-[1.2] tracking-tight text-ink sm:text-[2.25rem] lg:text-[2.5rem]">
           {t("quick.title")}
         </h1>
         <p className="mt-3 text-base text-ink-muted sm:mt-4">{t("quick.subtitle")}</p>
@@ -70,7 +70,7 @@ export default function QuickRequest() {
               size="xl"
               type="submit"
               disabled={submit.isPending}
-              className="max-sm:w-full font-medium"
+              className="max-sm:w-full"
             >
               {submit.isPending ? t("common.sending") : t("quick.submit")}
               {submit.isPending && <LoaderCircleIcon className="animate-spin" />}
