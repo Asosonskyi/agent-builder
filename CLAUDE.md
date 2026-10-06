@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**AI Agent Scope Builder**: a standalone demo app for Incode Group. It is a 3-step wizard (goal → skills + connectors → contact details → thank-you screen) that collects requirements so the team can prepare a cost estimate by hand. It is deployed to GitHub Pages as a static site. Desktop follows Figma; tablet and mobile layouts are improvised (single column below `lg`).
+**AI Agent Scope Builder**: a standalone demo app for Incode Group. It is a 3-step wizard (goal → skills + connectors → contact details → thank-you screen) that collects requirements so the team can prepare a cost estimate by hand. It is deployed to GitHub Pages as a static site. Desktop follows the mockups in `docs/design/`; tablet and mobile layouts are improvised (single column below `lg`).
 
-**[docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) is the source of truth** for screens, routes, data model, store shape, and phases. Read the relevant section before building a feature. Anything listed under "Open questions" (§13) must be confirmed with the user before you build the affected part. Do not guess.
+**[docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) is the source of truth** for screens, routes, data model, store shape, and phases. Read the relevant section before building a feature. Anything listed under "Open questions" (§12) must be confirmed with the user before you build the affected part. Do not guess.
 
-Phases 1–4 are implemented and follow the layout in plan §9. There is an extra `/quick` route (the short form, plan §13.5).
+Phases 1–4 are implemented and follow the layout in plan §9. There is an extra `/quick` route (the short form, plan §4.7).
 
 ## Commands
 
@@ -66,4 +66,4 @@ Mock fixtures in `src/api/mocks/` are JSON. Keep IDs identical across `en/` and 
 
 ## Design
 
-Take colors, typography, spacing and icons from Figma (the Figma MCP is available) and define them as Tailwind theme tokens in `src/index.css`. Do not eyeball values from screenshots. The visual language is flat, with square corners, 1–2 px borders, a single green accent and light grey panels. Restyle the shadcn defaults (which are rounded and neutral) to match.
+Take colors, typography, spacing and icons from the PNG mockups in `docs/design/` (there is no Figma file) and define them as Tailwind theme tokens in `src/index.css`. The visual language is flat, with square corners, 1–2 px borders, a single green accent and light grey panels. Restyle the shadcn defaults (which are rounded and neutral) to match.

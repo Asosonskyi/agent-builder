@@ -119,3 +119,7 @@
     @apply font-semibold;
   }
 }
+
+@utility form-field {
+  @apply h-14! border-line bg-background px-4! text-base! placeholder:text-ink-subtle md:text-base!;
+}

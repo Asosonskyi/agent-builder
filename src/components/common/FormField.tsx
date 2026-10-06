@@ -1,4 +1,3 @@
-import { cn } from "cn"
 import { useId } from "react"
 import type { FieldError } from "react-hook-form"
 import { useTranslation } from "react-i18next"
@@ -15,9 +14,6 @@ interface FormFieldProps {
   }) => React.ReactNode
 }
 
-export const fieldClassName =
-  "h-14 border-line bg-background px-4 text-base placeholder:text-ink-subtle md:text-base"
-
 /** Placeholder-only field per the design, with a visually hidden label for assistive tech. */
 export function FormField({ label, error, children }: FormFieldProps) {
   const { t } = useTranslation()
@@ -33,7 +29,7 @@ export function FormField({ label, error, children }: FormFieldProps) {
         placeholder: label,
         "aria-invalid": Boolean(error),
         "aria-describedby": error ? errorId : undefined,
-        className: cn(fieldClassName),
+        className: "form-field",
       })}
       {error?.message && (
         <p id={errorId} className="text-sm text-danger">
