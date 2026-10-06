@@ -7,7 +7,7 @@
         "id": "search_documents_knowledge",
         "title": "Search, documents and knowledge",
         "description": "Web research, document analysis, and instant answers from your knowledge base.",
-        "icon": "",
+        "icon": "categories/search.jpg",
         "skills": [
           {
             "id": "market_research",
@@ -66,7 +66,7 @@
         "id": "communication_meetings",
         "title": "Communication & Meetings",
         "description": "Email management, meeting preparation, and smart transcript analysis.",
-        "icon": "",
+        "icon": "categories/communication.jpg",
         "skills": [
           {
             "id": "meeting_prep",
@@ -95,7 +95,7 @@
         "id": "crm_customer_support",
         "title": "CRM & Customer Support",
         "description": "Support ticket resolution, feedback analysis, and automated CRM updates.",
-        "icon": "",
+        "icon": "categories/support.jpg",
         "skills": [
           {
             "id": "support_responses",
@@ -113,7 +113,7 @@
         "id": "content_writing_websites",
         "title": "Content, Writing & Websites",
         "description": "SEO copywriting, creative ad generation, and competitor monitoring.",
-        "icon": "",
+        "icon": "categories/content_writing.jpg",
         "skills": [
           {
             "id": "seo_content",
@@ -142,7 +142,7 @@
         "id": "data_analytics_reporting",
         "title": "Data Analytics & Reporting",
         "description": "Data consolidation, user trend analysis, and automated reporting.",
-        "icon": "",
+        "icon": "categories/data_analytics.jpg",
         "skills": [
           {
             "id": "data_consolidation",
@@ -160,7 +160,7 @@
         "id": "code_infrastructure",
         "title": "Code & Infrastructure",
         "description": "Smart code review, technical documentation, and automated task tracking.",
-        "icon": "",
+        "icon": "categories/code_infrastructure.jpg",
         "skills": [
           {
             "id": "code_review",
@@ -189,7 +189,7 @@
         "id": "education_learning",
         "title": "Education & Learning",
         "description": "Complex topic explanation, personalized study plans, and language learning.",
-        "icon": "",
+        "icon": "categories/education.jpg",
         "skills": [
           {
             "id": "explain_topics",
@@ -207,7 +207,7 @@
         "id": "life_personal_finance",
         "title": "Life & Personal Finance",
         "description": "Personal expense tracking, receipt categorization, and travel planning.",
-        "icon": "",
+        "icon": "categories/life.jpg",
         "skills": [
           {
             "id": "expense_tracking",
@@ -225,7 +225,7 @@
         "id": "hr_recruitment",
         "title": "HR & Recruitment",
         "description": "Resume screening, candidate shortlisting, and team onboarding support.",
-        "icon": "",
+        "icon": "categories/recruitment.jpg",
         "skills": [
           {
             "id": "resume_screening",
@@ -243,7 +243,7 @@
         "id": "legal_finance",
         "title": "Legal & Finance",
         "description": "Financial data comparison, compliance verification, and risk management.",
-        "icon": "",
+        "icon": "categories/legal_finance.jpg",
         "skills": [
           {
             "id": "financial_comparison",

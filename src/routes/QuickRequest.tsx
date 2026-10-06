@@ -7,7 +7,7 @@ import { useNavigate } from "react-router"
 import { quickRequestSchema, type QuickRequest as QuickRequestValues } from "@/api/schemas"
 import { submitQuickRequest } from "@/api/submit"
 import { FormField } from "@/components/common/FormField"
-import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
+import { AppImage } from "@/components/common/AppImage"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -73,9 +73,13 @@ export default function QuickRequest() {
         </form>
       </section>
       {/* The form is the point on smaller screens; the illustration only fills the desktop column. */}
-      <ImagePlaceholder className="h-full max-h-180 min-h-96 bg-panel text-base max-lg:hidden">
-        {t("common.illustrationPlaceholder")}
-      </ImagePlaceholder>
+      <AppImage
+        src="common/landing.jpg"
+        alt={t("common.illustrationAlt")}
+        // Out of flow, so the form sets the page height and the image fills what is left.
+        className="relative h-full max-h-180 min-h-96 max-lg:hidden"
+        imgClassName="absolute inset-0"
+      />
     </main>
   )
 }

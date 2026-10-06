@@ -7,7 +7,7 @@
         "id": "search_documents_knowledge",
         "title": "Пошук, документи та знання",
         "description": "Вебдослідження, аналіз документів і миттєві відповіді з вашої бази знань.",
-        "icon": "",
+        "icon": "categories/search.jpg",
         "skills": [
           {
             "id": "market_research",
@@ -66,7 +66,7 @@
         "id": "communication_meetings",
         "title": "Комунікація та зустрічі",
         "description": "Керування поштою, підготовка до зустрічей і розумний аналіз транскриптів.",
-        "icon": "",
+        "icon": "categories/communication.jpg",
         "skills": [
           {
             "id": "meeting_prep",
@@ -95,7 +95,7 @@
         "id": "crm_customer_support",
         "title": "CRM та підтримка клієнтів",
         "description": "Вирішення звернень, аналіз відгуків та автоматичне оновлення CRM.",
-        "icon": "",
+        "icon": "categories/support.jpg",
         "skills": [
           {
             "id": "support_responses",
@@ -113,7 +113,7 @@
         "id": "content_writing_websites",
         "title": "Контент, тексти та сайти",
         "description": "SEO-копірайтинг, генерація креативів для реклами та моніторинг конкурентів.",
-        "icon": "",
+        "icon": "categories/content_writing.jpg",
         "skills": [
           {
             "id": "seo_content",
@@ -142,7 +142,7 @@
         "id": "data_analytics_reporting",
         "title": "Аналітика даних і звітність",
         "description": "Консолідація даних, аналіз трендів користувачів та автоматична звітність.",
-        "icon": "",
+        "icon": "categories/data_analytics.jpg",
         "skills": [
           {
             "id": "data_consolidation",
@@ -160,7 +160,7 @@
         "id": "code_infrastructure",
         "title": "Код та інфраструктура",
         "description": "Розумне код-рев'ю, технічна документація та автоматичне відстеження задач.",
-        "icon": "",
+        "icon": "categories/code_infrastructure.jpg",
         "skills": [
           {
             "id": "code_review",
@@ -189,7 +189,7 @@
         "id": "education_learning",
         "title": "Освіта та навчання",
         "description": "Пояснення складних тем, персональні навчальні плани та вивчення мов.",
-        "icon": "",
+        "icon": "categories/education.jpg",
         "skills": [
           {
             "id": "explain_topics",
@@ -207,7 +207,7 @@
         "id": "life_personal_finance",
         "title": "Життя та особисті фінанси",
         "description": "Облік особистих витрат, категоризація чеків і планування подорожей.",
-        "icon": "",
+        "icon": "categories/life.jpg",
         "skills": [
           {
             "id": "expense_tracking",
@@ -225,7 +225,7 @@
         "id": "hr_recruitment",
         "title": "HR та рекрутинг",
         "description": "Скринінг резюме, відбір кандидатів і підтримка онбордингу команди.",
-        "icon": "",
+        "icon": "categories/recruitment.jpg",
         "skills": [
           {
             "id": "resume_screening",
@@ -243,7 +243,7 @@
         "id": "legal_finance",
         "title": "Право та фінанси",
         "description": "Порівняння фінансових даних, перевірка відповідності та управління ризиками.",
-        "icon": "",
+        "icon": "categories/legal_finance.jpg",
         "skills": [
           {
             "id": "financial_comparison",

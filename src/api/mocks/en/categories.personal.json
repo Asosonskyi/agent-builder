@@ -7,7 +7,7 @@
         "id": "search_documents_knowledge",
         "title": "Search, documents and knowledge",
         "description": "Web research, document analysis, and instant answers from your knowledge base.",
-        "icon": "",
+        "icon": "categories/search.jpg",
         "skills": [
           {
             "id": "market_research",
@@ -47,7 +47,7 @@
         "id": "communication_meetings",
         "title": "Communication & Meetings",
         "description": "Email management, meeting preparation, and smart transcript analysis.",
-        "icon": "",
+        "icon": "categories/communication.jpg",
         "skills": [
           {
             "id": "meeting_prep",
@@ -71,7 +71,7 @@
         "id": "education_learning",
         "title": "Education & Learning",
         "description": "Complex topic explanation, personalized study plans, and language learning.",
-        "icon": "",
+        "icon": "categories/education.jpg",
         "skills": [
           {
             "id": "explain_topics",
@@ -89,7 +89,7 @@
         "id": "life_personal_finance",
         "title": "Life & Personal Finance",
         "description": "Personal expense tracking, receipt categorization, and travel planning.",
-        "icon": "",
+        "icon": "categories/life.jpg",
         "skills": [
           {
             "id": "expense_tracking",

@@ -1,8 +1,8 @@
 {
   "header": {
     "logoAlt": "Incode Group",
-    "productLine1": "AI Agent",
-    "productLine2": "Scope Builder",
+    "productLine1": "Build your",
+    "productLine2": "Awesome AI Agent",
     "language": "Language",
     "cta": {
       "getEstimate": "Get estimate",
@@ -12,7 +12,7 @@
   "languages": { "uk": "Українська", "en": "English" },
   "common": {
     "stepOf": "Step {{step}} of {{total}}",
-    "illustrationPlaceholder": "AI Agent illustration",
+    "illustrationAlt": "AI Agent illustration",
     "loadError": "We couldn't load this content.",
     "retry": "Try again",
     "submitError": "Something went wrong. Please try again.",

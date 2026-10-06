@@ -3,7 +3,7 @@ import { XIcon } from "lucide-react"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import type { CategoryGroup, Goal } from "@/api/schemas"
-import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
+import { AppImage } from "@/components/common/AppImage"
 import { Skeleton } from "@/components/common/Skeleton"
 import { selectedByCategory, type SelectedCategory } from "@/store/selectors"
 import { useWizardActions, useWizardStore } from "@/store/wizard"
@@ -23,15 +23,12 @@ export function SummaryPanel({ goal, catalog, onChangeCategory, disabled }: Summ
 
   return (
     <div
-      className="flex flex-col bg-panel p-5 sm:p-8 lg:min-h-159"
+      className="flex flex-col bg-thumbnail p-5 sm:p-8 lg:min-h-159"
       aria-label={t("summary.willDo")}
     >
       {goal ? (
         <div className="flex items-start gap-4">
-          <ImagePlaceholder
-            src={goal.image}
-            className="size-14 shrink-0 bg-background sm:size-20"
-          />
+          <AppImage src={goal.image} className="size-14 shrink-0 sm:size-20" />
           <div className="flex min-w-0 flex-col gap-2">
             <h2 className="text-xl leading-tight text-ink sm:text-[1.75rem]">{goal.title}</h2>
             <p className="text-base text-ink-muted">{goal.description}</p>

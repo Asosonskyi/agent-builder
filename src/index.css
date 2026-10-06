@@ -27,6 +27,7 @@
   --line-strong: #1b1d1f;
   --panel: #f7f7f7;
   --placeholder: #efefef;
+  --thumbnail: #f8f8f8;
   --danger: #d93025;
   --border-grey: #dde1e6;
 
@@ -68,6 +69,7 @@
   --color-border-grey: var(--border-grey);
   --color-panel: var(--panel);
   --color-placeholder: var(--placeholder);
+  --color-thumbnail: var(--thumbnail);
   --color-danger: var(--danger);
 
   --color-ring: var(--ring);

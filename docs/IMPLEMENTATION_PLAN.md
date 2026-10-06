@@ -334,7 +334,7 @@ src/
   components/
     ui/                 # shadcn (Base UI) primitives
     layout/             # Header, LanguageSwitcher, HeaderCta
-    common/             # shared across pages (ButtonLink, FormField, ImagePlaceholder, …)
+    common/             # shared across pages (ButtonLink, FormField, AppImage, …)
   api/
     client.ts
     catalog.ts          # getGoals, getCategories

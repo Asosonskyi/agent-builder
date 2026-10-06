@@ -7,7 +7,7 @@
         "id": "search_documents_knowledge",
         "title": "Пошук, документи та знання",
         "description": "Вебдослідження, аналіз документів і миттєві відповіді з вашої бази знань.",
-        "icon": "",
+        "icon": "categories/search.jpg",
         "skills": [
           {
             "id": "market_research",
@@ -47,7 +47,7 @@
         "id": "communication_meetings",
         "title": "Комунікація та зустрічі",
         "description": "Керування поштою, підготовка до зустрічей і розумний аналіз транскриптів.",
-        "icon": "",
+        "icon": "categories/communication.jpg",
         "skills": [
           {
             "id": "meeting_prep",
@@ -71,7 +71,7 @@
         "id": "education_learning",
         "title": "Освіта та навчання",
         "description": "Пояснення складних тем, персональні навчальні плани та вивчення мов.",
-        "icon": "",
+        "icon": "categories/education.jpg",
         "skills": [
           {
             "id": "explain_topics",
@@ -89,7 +89,7 @@
         "id": "life_personal_finance",
         "title": "Життя та особисті фінанси",
         "description": "Облік особистих витрат, категоризація чеків і планування подорожей.",
-        "icon": "",
+        "icon": "categories/life.jpg",
         "skills": [
           {
             "id": "expense_tracking",

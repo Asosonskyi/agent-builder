@@ -1,8 +1,8 @@
 {
   "header": {
     "logoAlt": "Incode Group",
-    "productLine1": "AI Agent",
-    "productLine2": "Scope Builder",
+    "productLine1": "Build your",
+    "productLine2": "Awesome AI Agent",
     "language": "Мова",
     "cta": {
       "getEstimate": "Отримати оцінку",
@@ -12,7 +12,7 @@
   "languages": { "uk": "Українська", "en": "English" },
   "common": {
     "stepOf": "Крок {{step}} з {{total}}",
-    "illustrationPlaceholder": "Ілюстрація AI-агента",
+    "illustrationAlt": "Ілюстрація AI-агента",
     "loadError": "Не вдалося завантажити дані.",
     "retry": "Спробувати ще раз",
     "submitError": "Щось пішло не так. Спробуйте ще раз.",

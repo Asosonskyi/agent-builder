@@ -1,6 +1,6 @@
 import { cn } from "cn"
 import type { Goal } from "@/api/schemas"
-import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
+import { AppImage } from "@/components/common/AppImage"
 
 interface GoalCardProps {
   goal: Goal
@@ -27,9 +27,12 @@ export function GoalCard({ goal, checked, onSelect }: GoalCardProps) {
         onChange={onSelect}
         className="sr-only"
       />
-      <ImagePlaceholder
+      <AppImage
         src={goal.image}
-        className={cn("size-14 shrink-0 sm:size-20 short:size-16", checked && "bg-background")}
+        className={cn(
+          "size-14 shrink-0 bg-thumbnail p-1 sm:size-20 short:size-16",
+          checked && "bg-background",
+        )}
       />
       <span className="flex min-w-0 flex-col gap-1 sm:gap-2">
         <span className="text-lg font-semibold text-ink sm:text-xl">{goal.title}</span>

@@ -1,6 +1,6 @@
 import { AlarmClockIcon, ArrowRightIcon } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { ImagePlaceholder } from "@/components/common/ImagePlaceholder"
+import { AppImage } from "@/components/common/AppImage"
 import { ButtonLink } from "@/components/common/ButtonLink"
 
 export default function Landing() {
@@ -27,9 +27,14 @@ export default function Landing() {
           </ButtonLink>
         </div>
       </section>
-      <ImagePlaceholder className="h-80 bg-panel text-base max-md:hidden lg:h-full lg:max-h-180 lg:min-h-96">
-        {t("common.illustrationPlaceholder")}
-      </ImagePlaceholder>
+      <AppImage
+        src="common/landing.jpg"
+        alt={t("common.illustrationAlt")}
+        fetchPriority="high"
+        // Out of flow, so the text column sets the page height and the image fills what is left.
+        className="relative h-80 max-md:hidden lg:h-full lg:max-h-180 lg:min-h-96"
+        imgClassName="absolute inset-0"
+      />
     </main>
   )
 }

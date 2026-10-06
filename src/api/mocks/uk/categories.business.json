@@ -7,7 +7,7 @@
         "id": "search_documents_knowledge",
         "title": "Пошук, документи та знання",
         "description": "Вебдослідження, аналіз документів і миттєві відповіді з вашої бази знань.",
-        "icon": "",
+        "icon": "categories/search.jpg",
         "skills": [
           {
             "id": "doc_summaries",
@@ -48,7 +48,7 @@
         "id": "communication_meetings",
         "title": "Комунікація та зустрічі",
         "description": "Керування поштою, підготовка до зустрічей і розумний аналіз транскриптів.",
-        "icon": "",
+        "icon": "categories/communication.jpg",
         "skills": [
           {
             "id": "transcript_analysis",
@@ -67,7 +67,7 @@
         "id": "crm_customer_support",
         "title": "CRM та підтримка клієнтів",
         "description": "Вирішення звернень, аналіз відгуків та автоматичне оновлення CRM.",
-        "icon": "",
+        "icon": "categories/support.jpg",
         "skills": [
           {
             "id": "support_responses",
@@ -85,7 +85,7 @@
         "id": "content_writing_websites",
         "title": "Контент, тексти та сайти",
         "description": "SEO-копірайтинг, генерація креативів для реклами та моніторинг конкурентів.",
-        "icon": "",
+        "icon": "categories/content_writing.jpg",
         "skills": [
           {
             "id": "seo_content",
@@ -114,7 +114,7 @@
         "id": "data_analytics_reporting",
         "title": "Аналітика даних і звітність",
         "description": "Консолідація даних, аналіз трендів користувачів та автоматична звітність.",
-        "icon": "",
+        "icon": "categories/data_analytics.jpg",
         "skills": [
           {
             "id": "data_consolidation",
@@ -138,7 +138,7 @@
         "id": "hr_recruitment",
         "title": "HR та рекрутинг",
         "description": "Скринінг резюме, відбір кандидатів і підтримка онбордингу команди.",
-        "icon": "",
+        "icon": "categories/recruitment.jpg",
         "skills": [
           {
             "id": "resume_screening",
