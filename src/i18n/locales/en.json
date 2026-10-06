@@ -2,7 +2,7 @@
   "header": {
     "logoAlt": "Incode Group",
     "productLine1": "Build your",
-    "productLine2": "Awesome AI Agent",
+    "productLine2": "Awesome <strong>AI Agent</strong>",
     "language": "Language",
     "cta": {
       "getEstimate": "Get estimate",
@@ -23,8 +23,8 @@
     "titleAccent": "Build an AI agent",
     "titleRest": " for your business, for personal use, or both.",
     "subtitle": "Answer a few questions, and we'll show you which tasks can be handed over to AI and what your agent could look like.",
-    "getEstimate": "Get estimate",
-    "quickRequest": "Submit request in 1 click"
+    "getEstimate": "Let's build",
+    "quickRequest": "Contact us right now"
   },
   "goal": {
     "title": "How do you plan to use your AI agent?",

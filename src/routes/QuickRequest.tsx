@@ -77,8 +77,9 @@ export default function QuickRequest() {
         src="common/landing.jpg"
         alt={t("common.illustrationAlt")}
         // Out of flow, so the form sets the page height and the image fills what is left.
-        className="relative h-full max-h-180 min-h-96 max-lg:hidden"
-        imgClassName="absolute inset-0"
+        className="relative h-full max-h-140 min-h-96 max-lg:hidden overflow-hidden"
+        // The artwork has more white space below the robot than above, so nudge it down to centre it.
+        imgClassName="absolute inset-0 translate-y-[6%]"
       />
     </main>
   )

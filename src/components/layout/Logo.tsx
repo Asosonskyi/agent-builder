@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
 import { Link } from "react-router"
 
 import logoSrc from "/logo.svg"
@@ -15,7 +15,9 @@ export function Logo() {
       <span aria-hidden className="h-12 w-px bg-line max-md:hidden" />
       <span className="flex flex-col text-base leading-6 text-ink max-md:hidden">
         <span>{t("header.productLine1")}</span>
-        <span>{t("header.productLine2")}</span>
+        <span>
+          <Trans i18nKey="header.productLine2" components={{ strong: <strong /> }} />
+        </span>
       </span>
     </Link>
   )

@@ -2,7 +2,7 @@
   "header": {
     "logoAlt": "Incode Group",
     "productLine1": "Build your",
-    "productLine2": "Awesome AI Agent",
+    "productLine2": "Awesome <strong>AI Agent</strong>",
     "language": "Мова",
     "cta": {
       "getEstimate": "Отримати оцінку",
@@ -23,8 +23,8 @@
     "titleAccent": "Створіть AI-агента",
     "titleRest": " для бізнесу, для себе або для того й іншого.",
     "subtitle": "Дайте відповідь на кілька запитань, і ми покажемо, які задачі можна передати AI та яким може бути ваш агент.",
-    "getEstimate": "Отримати оцінку",
-    "quickRequest": "Залишити запит в 1 клік"
+    "getEstimate": "Почнімо створювати",
+    "quickRequest": "Зв'язатися просто зараз"
   },
   "goal": {
     "title": "Як ви плануєте використовувати AI-агента?",

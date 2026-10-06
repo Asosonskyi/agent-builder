@@ -20,7 +20,6 @@ export function AppImage({ src, alt = "", className, imgClassName, ...props }: A
         src={assetUrl(src)}
         alt={alt}
         decoding="async"
-        loading="lazy"
         className={cn("size-full object-contain mix-blend-multiply", imgClassName)}
         {...props}
       />

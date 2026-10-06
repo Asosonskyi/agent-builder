@@ -32,8 +32,9 @@ export default function Landing() {
         alt={t("common.illustrationAlt")}
         fetchPriority="high"
         // Out of flow, so the text column sets the page height and the image fills what is left.
-        className="relative h-80 max-md:hidden lg:h-full lg:max-h-180 lg:min-h-96"
-        imgClassName="absolute inset-0"
+        className="relative h-80 max-md:hidden lg:h-full lg:max-h-140 lg:min-h-96 overflow-hidden"
+        // The artwork has more white space below the robot than above, so nudge it down to centre it.
+        imgClassName="absolute inset-0 translate-y-[11%]"
       />
     </main>
   )
